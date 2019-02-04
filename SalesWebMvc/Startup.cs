@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SalesWebMvc.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebMvc
 {
@@ -33,6 +35,9 @@ namespace SalesWebMvc
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //conexão com banco de dados
+            services.AddDbContext<dboCommomContext>     (options => options.UseNpgsql("Host=localhost;Database=dboCommomSalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
+            services.AddDbContext<SalesWebMvcContext>   (options => options.UseNpgsql("Host=localhost;Database=dboSalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

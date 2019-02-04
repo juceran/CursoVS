@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
 
 namespace SalesWebMvc.Controllers
 {
@@ -15,9 +16,10 @@ namespace SalesWebMvc.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Sobre()
         {
             ViewData["Message"] = "Your application description page.";
+            ViewData["email"] = "cetasistemas@cetasistemas.com.br";
 
             return View();
         }

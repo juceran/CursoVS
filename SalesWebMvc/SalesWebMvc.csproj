@@ -5,12 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190203213641_Sales.Tabelas Empresa e Departamento.cs" />
+    <Compile Remove="Migrations\20190203213641_Sales.Tabelas Empresa e Departamento.Designer.cs" />
+    <Compile Remove="Migrations\20190203213823_Migration.Sales.Tabelas Empresa e Departamento.cs" />
+    <Compile Remove="Migrations\20190203213823_Migration.Sales.Tabelas Empresa e Departamento.Designer.cs" />
+    <Compile Remove="Migrations\20190203213935_Migrations.Sales.cs" />
+    <Compile Remove="Migrations\20190203213935_Migrations.Sales.Designer.cs" />
+    <Compile Remove="Migrations\20190203214452_Migrations.Sales.cs" />
+    <Compile Remove="Migrations\20190203214452_Migrations.Sales.Designer.cs" />
+    <Compile Remove="Migrations\20190203215610_SalesEmpresasEDepartamentos.cs" />
+    <Compile Remove="Migrations\20190203215610_SalesEmpresasEDepartamentos.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
   </ItemGroup>
 
