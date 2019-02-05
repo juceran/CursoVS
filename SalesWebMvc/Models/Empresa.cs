@@ -4,7 +4,7 @@ namespace SalesWebMvc.Models
 {
     public class Empresa
     {  
-        // alteracao teste
+        // alteracao teste 2
         public int Id { get; set; }
         public string Database { get; set; }
         public string CNPJ { get; set; }
