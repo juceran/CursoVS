@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SalesWebMvc.Models;
+using System;
 
 namespace SalesWebMvc.ContextFluentAPI
 {
@@ -8,6 +9,27 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<PessoaCliente> modelBuilder)
         {
+            //campos comuns
+            modelBuilder
+                .Property(p => p.Ativo)
+                .HasDefaultValue(true);
+            modelBuilder
+                .Property(p => p.DataCadastro)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedOnAdd()
+                .HasDefaultValue(DateTime.Now);
+            modelBuilder
+                .Property(p => p.UltimaAtualizacao)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder
+                .Property(p => p.Deletado)
+                .HasDefaultValue(false);
+            modelBuilder
+                .Property(p => p.DeletadoData)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedNever();
+
             //relacionamento 1 para 1
             modelBuilder
                 .HasOne(p => p.Pessoa)

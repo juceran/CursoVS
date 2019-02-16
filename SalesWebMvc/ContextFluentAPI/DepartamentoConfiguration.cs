@@ -9,11 +9,6 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<Departamento> modelBuilder)
         {
-            /*
-            modelBuilder
-                .Property(p => p.Nome)
-                .HasColumnType("varchar(64)");
-
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)
@@ -34,7 +29,7 @@ namespace SalesWebMvc.ContextFluentAPI
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP")
                 .ValueGeneratedNever();
-            */
+
             modelBuilder
                 .HasData(new Departamento
                 {

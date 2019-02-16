@@ -48,8 +48,9 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos/Create
         public IActionResult Create()
         {
+            Departamento departamento = new Departamento { DataCadastro = DateTime.Now, Ativo = true };
             ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");
-            return View();
+            return View(departamento);
         }
 
         // POST: Departamentos/Create
@@ -57,7 +58,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Nome,EmpresaId,Id,Ativo,DataCadastro")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +85,7 @@ namespace SalesWebMvc.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", departamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", departamento.EmpresaId);
             return View(departamento);
         }
 
@@ -93,7 +94,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Nome,EmpresaId,Id,Ativo,UltimaAtualizacao")] Departamento departamento)
         {
             if (id != departamento.Id)
             {

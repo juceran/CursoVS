@@ -48,6 +48,7 @@ namespace SalesWebMvc
             //injeçao de dependência para personalizar a criação do campos no banco de dados, FluentAPI - Contexts
             services.AddScoped<EmpresaConfiguration>();
             services.AddScoped<DepartamentoConfiguration>();
+            services.AddScoped<PessoaConfiguration>();
             services.AddScoped<PessoaClienteConfiguration>();
             services.AddScoped<PessoaFisicaConfiguration>();
             services.AddScoped<PessoaFornecedorConfiguration>();
