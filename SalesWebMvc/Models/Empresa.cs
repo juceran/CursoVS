@@ -6,9 +6,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SalesWebMvc.Models
 {
+<<<<<<< HEAD
     public class Empresa : CamposComuns
     {
         [Column(TypeName = "varchar(64)")]
+=======
+    public class Empresa
+    {  
+        // alteracao teste 2
+        public int Id { get; set; }
+>>>>>>> ad764b35a0d614c79bc4d2bfef9c3e56ae28255e
         public string Database { get; set; }
 
         [Column(TypeName = "varchar(16)")]
