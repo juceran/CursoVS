@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,22 @@
     <Compile Remove="Migrations\20190203214452_Migrations.Sales.Designer.cs" />
     <Compile Remove="Migrations\20190203215610_SalesEmpresasEDepartamentos.cs" />
     <Compile Remove="Migrations\20190203215610_SalesEmpresasEDepartamentos.Designer.cs" />
+    <Compile Remove="Migrations\20190203215746_SalesEmpresasEDepartamentos.cs" />
+    <Compile Remove="Migrations\20190203215746_SalesEmpresasEDepartamentos.Designer.cs" />
+    <Compile Remove="Migrations\20190204201318_inicio.cs" />
+    <Compile Remove="Migrations\20190204201318_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190205114122_inicio.cs" />
+    <Compile Remove="Migrations\20190205114122_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190207010535_CamposComuns.cs" />
+    <Compile Remove="Migrations\20190207010535_CamposComuns.Designer.cs" />
+    <Compile Remove="Migrations\20190209203649_inicio.cs" />
+    <Compile Remove="Migrations\20190209203649_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190212182600_inicio.cs" />
+    <Compile Remove="Migrations\20190212182600_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190212183718_inicio.cs" />
+    <Compile Remove="Migrations\20190212183718_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190212184015_inicio.cs" />
+    <Compile Remove="Migrations\20190212184015_inicio.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +43,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\Comum\" />
+    <Folder Include="Migrations\Novo\" />
   </ItemGroup>
 
 </Project>

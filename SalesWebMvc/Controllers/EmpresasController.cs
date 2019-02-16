@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SalesWebMvc.Data;
+using SalesWebMvc.Context;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresas.ToListAsync());
+            return View(await _context.Empresa.ToListAsync());
         }
 
         // GET: Empresas/Details/5
@@ -33,7 +33,7 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresas
+            var empresa = await _context.Empresa
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (empresa == null)
             {
@@ -54,7 +54,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Ativo,DataCadastro,Deletado,DeletadoData")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresas.FindAsync(id);
+            var empresa = await _context.Empresa.FindAsync(id);
             if (empresa == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Ativo,DataCadastro,Deletado,DeletadoData")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Empresa empresa)
         {
             if (id != empresa.Id)
             {
@@ -124,7 +124,7 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresas
+            var empresa = await _context.Empresa
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (empresa == null)
             {
@@ -139,15 +139,15 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var empresa = await _context.Empresas.FindAsync(id);
-            _context.Empresas.Remove(empresa);
+            var empresa = await _context.Empresa.FindAsync(id);
+            _context.Empresa.Remove(empresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmpresaExists(int id)
         {
-            return _context.Empresas.Any(e => e.Id == id);
+            return _context.Empresa.Any(e => e.Id == id);
         }
     }
 }

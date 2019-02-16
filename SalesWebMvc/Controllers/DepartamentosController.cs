@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SalesWebMvc.Data;
+using SalesWebMvc.Context;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Departamentos.Include(d => d.Empresa);
+            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var departamento = await _context.Departamento
                 .Include(d => d.Empresa)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
@@ -48,7 +48,7 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos/Create
         public IActionResult Create()
         {
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");
             return View();
         }
 
@@ -57,15 +57,17 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao,Ativo,DataCadastro,Deletado,DeletadoData,EmpresaId")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Nome,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Departamento departamento)
         {
             if (ModelState.IsValid)
             {
+                departamento.DataCadastro = DateTime.Now;
+                departamento.Ativo = true;
                 _context.Add(departamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", departamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", departamento.EmpresaId);
             return View(departamento);
         }
 
@@ -77,12 +79,12 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos.FindAsync(id);
+            var departamento = await _context.Departamento.FindAsync(id);
             if (departamento == null)
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", departamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", departamento.EmpresaId);
             return View(departamento);
         }
 
@@ -91,7 +93,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,Ativo,DataCadastro,Deletado,DeletadoData,EmpresaId")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Nome,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Departamento departamento)
         {
             if (id != departamento.Id)
             {
@@ -102,6 +104,7 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
+                    departamento.UltimaAtualizacao = DateTime.Now;
                     _context.Update(departamento);
                     await _context.SaveChangesAsync();
                 }
@@ -118,7 +121,7 @@ namespace SalesWebMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Id", departamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia", departamento.EmpresaId);
             return View(departamento);
         }
 
@@ -130,7 +133,7 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var departamento = await _context.Departamento
                 .Include(d => d.Empresa)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
@@ -146,15 +149,15 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var departamento = await _context.Departamentos.FindAsync(id);
-            _context.Departamentos.Remove(departamento);
+            var departamento = await _context.Departamento.FindAsync(id);
+            _context.Departamento.Remove(departamento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DepartamentoExists(int id)
         {
-            return _context.Departamentos.Any(e => e.Id == id);
+            return _context.Departamento.Any(e => e.Id == id);
         }
     }
 }

@@ -12,6 +12,9 @@ namespace SalesWebMvc
 {
     public class Program
     {
+        public static string BancoDeDadosAplicacao { get; set; }
+        public static string BancoDeDadosNovo { get; set; }
+
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();

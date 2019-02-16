@@ -1,0 +1,49 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SalesWebMvc.Models;
+using System;
+
+namespace SalesWebMvc.ContextFluentAPI
+{
+    public class DepartamentoConfiguration : IEntityTypeConfiguration<Departamento>
+    {
+        public void Configure(EntityTypeBuilder<Departamento> modelBuilder)
+        {
+            /*
+            modelBuilder
+                .Property(p => p.Nome)
+                .HasColumnType("varchar(64)");
+
+            //campos comuns
+            modelBuilder
+                .Property(p => p.Ativo)
+                .HasDefaultValue(true);
+            modelBuilder
+                .Property(p => p.DataCadastro)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedOnAdd()
+                .HasDefaultValue(DateTime.Now);
+            modelBuilder
+                .Property(p => p.UltimaAtualizacao)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder
+                .Property(p => p.Deletado)
+                .HasDefaultValue(false);
+            modelBuilder
+                .Property(p => p.DeletadoData)
+                .HasColumnType("TIMESTAMP")
+                .ValueGeneratedNever();
+            */
+            modelBuilder
+                .HasData(new Departamento
+                {
+                    Id = 1,
+                    Nome = "RECURSOS HUMANOS",
+                    Ativo = true,
+                    DataCadastro = DateTime.Now,
+                    EmpresaId = 1
+                });
+        }
+    }
+}

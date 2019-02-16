@@ -11,10 +11,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.Nome)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Descricao)
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.Uf)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Ativo)
@@ -29,6 +35,12 @@
             @Html.DisplayFor(model => model.DataCadastro)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.UltimaAtualizacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UltimaAtualizacao)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Deletado)
         </dt>
         <dd>
@@ -39,12 +51,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DeletadoData)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.Id)
         </dd>
     </dl>
 </div>
