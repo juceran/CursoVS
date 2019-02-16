@@ -36,6 +36,7 @@ namespace SalesWebMvc.ContextFluentAPI
                     Id = 1,
                     Nome = "RECURSOS HUMANOS",
                     Ativo = true,
+                    Deletado = false,
                     DataCadastro = DateTime.Now,
                     EmpresaId = 1
                 });
