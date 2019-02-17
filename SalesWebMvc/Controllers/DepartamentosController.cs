@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa).OrderBy(d => d.Nome).Where(d => d.Deletado == false);
+            var salesWebMvcContext = _context.Departamento.Include(e => e.Empresa).OrderBy(d => d.Nome).Where(d => d.Deletado == false);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace SalesWebMvc.Controllers
             }
 
             var departamento = await _context.Departamento
-                .Include(d => d.Empresa)
+                .Include(e => e.Empresa)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (departamento == null)
             {

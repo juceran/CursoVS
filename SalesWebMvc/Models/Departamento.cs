@@ -8,7 +8,7 @@ namespace SalesWebMvc.Models
 {
     public class Departamento : CamposComuns
     {
-        [Required]
+        [Required(ErrorMessage ="Nome do departamento é obrigatório")]
         [Column(TypeName = "varchar(64)")]
         [Display(Name = "Nome do Departamento")]
         public string Nome { get; set; }
