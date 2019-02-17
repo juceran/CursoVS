@@ -12,35 +12,35 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<Empresa> modelBuilder)
         {
-         /*  
-            modelBuilder
-                 .Property(p => p.Database)
-                 .HasColumnType("varchar(64)");
-            modelBuilder
-                .Property(p => p.CNPJ)
-                .HasColumnType("varchar(16)");
-            modelBuilder
-                .Property(p => p.IE)
-                .HasColumnType("varchar(64)");
-            modelBuilder
-                .Property(p => p.RazaoSocial)
-                .HasColumnType("varchar(64)");
-            modelBuilder
-                .Property(p => p.Fantasia)
-                .HasColumnType("varchar(64)");
-            modelBuilder
-                .Property(p => p.DataAbertura)
-                .HasColumnType("date");
-            modelBuilder
-                .Property(p => p.Email)
-                .HasColumnType("varchar(128)");
-            modelBuilder
-                .Property(p => p.Website)
-                .HasColumnType("varchar(128)");
-            modelBuilder
-                .Property(p => p.CEP)
-                .HasColumnType("varchar(8)");
-        */
+            /*  
+               modelBuilder
+                    .Property(p => p.Database)
+                    .HasColumnType("varchar(64)");
+               modelBuilder
+                   .Property(p => p.CNPJ)
+                   .HasColumnType("varchar(16)");
+               modelBuilder
+                   .Property(p => p.IE)
+                   .HasColumnType("varchar(64)");
+               modelBuilder
+                   .Property(p => p.RazaoSocial)
+                   .HasColumnType("varchar(64)");
+               modelBuilder
+                   .Property(p => p.Fantasia)
+                   .HasColumnType("varchar(64)");
+               modelBuilder
+                   .Property(p => p.DataAbertura)
+                   .HasColumnType("date");
+               modelBuilder
+                   .Property(p => p.Email)
+                   .HasColumnType("varchar(128)");
+               modelBuilder
+                   .Property(p => p.Website)
+                   .HasColumnType("varchar(128)");
+               modelBuilder
+                   .Property(p => p.CEP)
+                   .HasColumnType("varchar(8)");
+           */
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)
@@ -48,20 +48,18 @@ namespace SalesWebMvc.ContextFluentAPI
             modelBuilder
                 .Property(p => p.DataCadastro)
                 .HasColumnType("TIMESTAMP")
-                .ValueGeneratedOnAdd()
                 .HasDefaultValue(DateTime.Now);
             modelBuilder
                 .Property(p => p.UltimaAtualizacao)
                 .HasColumnType("TIMESTAMP")
-                .ValueGeneratedOnAddOrUpdate();
+                .HasDefaultValue(DateTime.Now);
             modelBuilder
                 .Property(p => p.Deletado)
                 .HasDefaultValue(false);
             modelBuilder
                 .Property(p => p.DeletadoData)
-                .HasColumnType("TIMESTAMP")
-                .ValueGeneratedNever();
-            
+                .HasColumnType("TIMESTAMP");
+
             modelBuilder
                 .HasData(new Empresa {
                     Id = 1,

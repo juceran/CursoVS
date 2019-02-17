@@ -31,12 +31,21 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class=""><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class=""><a asp-area="" asp-controller="Departamentos" asp-action="Index">Departamentos</a></li>
-                    <li class=""><a asp-area="" asp-controller="Empresas" asp-action="Index">Empresas</a></li>
-                    <li class=""><a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a></li>
                     <li class=""><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li class=""><a asp-area="" asp-controller="Pessoas" asp-action="Index">Pessoas</a></li>
-                    <li class=""><a asp-area="" asp-controller="Logins" asp-action="Login">Login</a></li>
+                    <li class=""><a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cadastros<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class=""><a asp-area="" asp-controller="Empresas" asp-action="Index">Empresas</a></li>
+                            <li class=""><a asp-area="" asp-controller="Departamentos" asp-action="Index">Departamentos</a></li>
+                            <li class=""><a asp-area="" asp-controller="Pessoas" asp-action="Index">Pessoas</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li class=""><a asp-area="" asp-controller="Logins" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
@@ -52,7 +61,7 @@
         </footer>
     </div>
 
-    <environment include="Development">
+    <environment include="Development">      
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>

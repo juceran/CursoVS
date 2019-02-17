@@ -12,23 +12,21 @@ namespace SalesWebMvc.ContextFluentAPI
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)
-                    .HasDefaultValue(true);
+                .HasDefaultValue(true);
             modelBuilder
                 .Property(p => p.DataCadastro)
-                    .HasColumnType("TIMESTAMP")
-                    .ValueGeneratedOnAdd()
-                    .HasDefaultValue(DateTime.Now);
+                .HasColumnType("TIMESTAMP")
+                .HasDefaultValue(DateTime.Now);
             modelBuilder
                 .Property(p => p.UltimaAtualizacao)
-                    .HasColumnType("TIMESTAMP")
-                    .ValueGeneratedOnAddOrUpdate();
+                .HasColumnType("TIMESTAMP")
+                .HasDefaultValue(DateTime.Now);
             modelBuilder
                 .Property(p => p.Deletado)
-                    .HasDefaultValue(false);
+                .HasDefaultValue(false);
             modelBuilder
                 .Property(p => p.DeletadoData)
-                    .HasColumnType("TIMESTAMP")
-                    .ValueGeneratedNever();
+                .HasColumnType("TIMESTAMP");
         }
     }
 }

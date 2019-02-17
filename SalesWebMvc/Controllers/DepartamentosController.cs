@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa);
+            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa).OrderBy(d => d.Nome);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -62,6 +62,17 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                //testa se o departamento já existe
+                var salesWebMvcContext = _context.Departamento.Where(d => d.EmpresaId == departamento.EmpresaId).OrderBy(d => d.Nome);
+                foreach (var item in salesWebMvcContext)
+                {
+                    if(item.Nome == departamento.Nome)
+                    {
+                        ViewData["message"] = "Nome do Departamento já existe!";
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+
                 departamento.DataCadastro = DateTime.Now;
                 departamento.Ativo = true;
                 _context.Add(departamento);
@@ -94,7 +105,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,EmpresaId,Id,Ativo,UltimaAtualizacao")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Nome,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao")] Departamento departamento)
         {
             if (id != departamento.Id)
             {
@@ -105,6 +116,7 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
+                    departamento.Deletado = false;
                     departamento.UltimaAtualizacao = DateTime.Now;
                     _context.Update(departamento);
                     await _context.SaveChangesAsync();

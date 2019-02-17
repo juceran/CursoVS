@@ -1,0 +1,54 @@
+﻿@model SalesWebMvc.Models.Pessoa
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Pessoa</h4>
+<hr />
+<div class="row">
+    <div class="container">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create">
+            <ul class="nav nav-pills" role="tab">
+                <li class="active"> <a href="#pessoa" data-toggle="tab">Pessoa</a></li>
+                <li>                <a href="#cliente" data-toggle="tab">Cliente</a></li>
+                <li>                <a href="#email" data-toggle="tab">Email</a></li>
+                <li>                <a href="#endereco" data-toggle="tab">Endereço</a></li>
+                <li>                <a href="#fornecedor" data-toggle="tab">Fornecedor</a></li>
+            </ul>
+            <div class="tab-content clearfix">
+                <div class="tab-pane active" id="pessoa">
+                    <div class="form-group">
+                        <input asp-for="Descricao" class="form-control" placeholder="Nome principal"/>
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="tab-pane" id="cliente">
+                    <h3>cliente</h3>
+                </div>
+                <div class="tab-pane" id="email">
+                    <h3>email</h3>
+                </div>
+                <div class="tab-pane" id="endereco">
+                    <h3>endereço</h3>
+                </div>
+                <div class="tab-pane" id="fornecedor">
+                    <h3>Forncedor</h3>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-primary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

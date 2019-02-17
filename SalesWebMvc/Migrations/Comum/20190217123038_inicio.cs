@@ -15,8 +15,8 @@ namespace SalesWebMvc.Migrations.Comum
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Ativo = table.Column<bool>(nullable: false, defaultValue: true),
-                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 16, 8, 5, 59, 20, DateTimeKind.Local)),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 576, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 577, DateTimeKind.Local)),
                     Deletado = table.Column<bool>(nullable: true, defaultValue: false),
                     DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Database = table.Column<string>(type: "varchar(64)", nullable: true),
@@ -49,8 +49,8 @@ namespace SalesWebMvc.Migrations.Comum
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Ativo = table.Column<bool>(nullable: false, defaultValue: true),
-                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 16, 8, 5, 59, 27, DateTimeKind.Local)),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 583, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 583, DateTimeKind.Local)),
                     Deletado = table.Column<bool>(nullable: true, defaultValue: false),
                     DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Cliente = table.Column<bool>(nullable: false),
@@ -67,11 +67,11 @@ namespace SalesWebMvc.Migrations.Comum
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Ativo = table.Column<bool>(nullable: false),
-                    DataCadastro = table.Column<DateTime>(nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(nullable: true),
-                    Deletado = table.Column<bool>(nullable: true),
-                    DeletadoData = table.Column<DateTime>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 587, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 587, DateTimeKind.Local)),
+                    Deletado = table.Column<bool>(nullable: true, defaultValue: false),
+                    DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     varchar128 = table.Column<string>(name: "varchar(128)", nullable: true),
                     Pai = table.Column<string>(type: "varchar(128)", nullable: true),
                     Mae = table.Column<string>(type: "varchar(128)", nullable: true),
@@ -92,11 +92,11 @@ namespace SalesWebMvc.Migrations.Comum
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Ativo = table.Column<bool>(nullable: false),
-                    DataCadastro = table.Column<DateTime>(nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(nullable: true),
-                    Deletado = table.Column<bool>(nullable: true),
-                    DeletadoData = table.Column<DateTime>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 590, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 590, DateTimeKind.Local)),
+                    Deletado = table.Column<bool>(nullable: true, defaultValue: false),
+                    DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Fornecedor = table.Column<bool>(nullable: false),
                     PessoaId = table.Column<int>(nullable: false)
                 },
@@ -111,11 +111,11 @@ namespace SalesWebMvc.Migrations.Comum
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Ativo = table.Column<bool>(nullable: false),
-                    DataCadastro = table.Column<DateTime>(nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(nullable: true),
-                    Deletado = table.Column<bool>(nullable: true),
-                    DeletadoData = table.Column<DateTime>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 592, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 593, DateTimeKind.Local)),
+                    Deletado = table.Column<bool>(nullable: true, defaultValue: false),
+                    DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     CNPJ = table.Column<string>(type: "varchar(16)", nullable: true),
                     IE = table.Column<string>(type: "varchar(64)", nullable: true),
                     RazaoSocial = table.Column<string>(type: "varchar(64)", nullable: true),
@@ -138,11 +138,11 @@ namespace SalesWebMvc.Migrations.Comum
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Ativo = table.Column<bool>(nullable: false),
-                    DataCadastro = table.Column<DateTime>(nullable: true),
-                    UltimaAtualizacao = table.Column<DateTime>(nullable: true),
-                    Deletado = table.Column<bool>(nullable: true),
-                    DeletadoData = table.Column<DateTime>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 595, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 595, DateTimeKind.Local)),
+                    Deletado = table.Column<bool>(nullable: true, defaultValue: false),
+                    DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Usuario = table.Column<string>(type: "varchar(64)", nullable: true),
                     PessoaId = table.Column<int>(nullable: false)
                 },
@@ -158,8 +158,8 @@ namespace SalesWebMvc.Migrations.Comum
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Ativo = table.Column<bool>(nullable: false, defaultValue: true),
-                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 16, 8, 5, 59, 24, DateTimeKind.Local)),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 580, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 580, DateTimeKind.Local)),
                     Deletado = table.Column<bool>(nullable: true, defaultValue: false),
                     DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Nome = table.Column<string>(type: "varchar(64)", nullable: false),
@@ -182,8 +182,8 @@ namespace SalesWebMvc.Migrations.Comum
                 {
                     Id = table.Column<int>(nullable: false),
                     Ativo = table.Column<bool>(nullable: false, defaultValue: true),
-                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 16, 8, 5, 59, 26, DateTimeKind.Local)),
-                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
+                    DataCadastro = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 581, DateTimeKind.Local)),
+                    UltimaAtualizacao = table.Column<DateTime>(type: "TIMESTAMP", nullable: true, defaultValue: new DateTime(2019, 2, 17, 9, 30, 38, 581, DateTimeKind.Local)),
                     Deletado = table.Column<bool>(nullable: true, defaultValue: false),
                     DeletadoData = table.Column<DateTime>(type: "TIMESTAMP", nullable: true),
                     Descricao = table.Column<string>(type: "varchar(64)", nullable: false),
@@ -344,12 +344,12 @@ namespace SalesWebMvc.Migrations.Comum
             migrationBuilder.InsertData(
                 table: "Empresa",
                 columns: new[] { "Id", "Ativo", "Bairro", "CEP", "CNPJ", "Complemento", "DataAbertura", "DataCadastro", "Database", "Deletado", "DeletadoData", "Email", "Fantasia", "GIA", "IBGE", "IE", "Localidade", "Logradouro", "RazaoSocial", "Uf", "UltimaAtualizacao", "Unidade", "Website" },
-                values: new object[] { 1, true, "SERRARIA", "57046055", "70000401000127", null, new DateTime(1994, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 2, 16, 8, 5, 59, 23, DateTimeKind.Local), "Comum", null, null, "juceran@gmail.com", "CETASISTEMAS", null, null, "ISENTO", null, null, "JUCERAN CAVALCANTE ME", "AL", null, null, "www.cetasistemas.com.br" });
+                values: new object[] { 1, true, "SERRARIA", "57046055", "70000401000127", null, new DateTime(1994, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 2, 17, 9, 30, 38, 579, DateTimeKind.Local), "Comum", null, null, "juceran@gmail.com", "CETASISTEMAS", null, null, "ISENTO", null, null, "JUCERAN CAVALCANTE ME", "AL", null, null, "www.cetasistemas.com.br" });
 
             migrationBuilder.InsertData(
                 table: "Departamento",
                 columns: new[] { "Id", "Ativo", "DataCadastro", "Deletado", "DeletadoData", "EmpresaId", "Nome", "UltimaAtualizacao" },
-                values: new object[] { 1, true, new DateTime(2019, 2, 16, 8, 5, 59, 25, DateTimeKind.Local), null, null, 1, "RECURSOS HUMANOS", null });
+                values: new object[] { 1, true, new DateTime(2019, 2, 17, 9, 30, 38, 580, DateTimeKind.Local), false, null, 1, "RECURSOS HUMANOS", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departamento_EmpresaId",

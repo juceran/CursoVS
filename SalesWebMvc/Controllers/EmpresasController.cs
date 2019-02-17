@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.ToListAsync());
+            return View(await _context.Empresa.OrderBy(e => e.RazaoSocial).ToListAsync());
         }
 
         // GET: Empresas/Details/5
