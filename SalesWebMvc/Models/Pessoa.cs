@@ -19,6 +19,7 @@ namespace SalesWebMvc.Models
 
         //referencias de relacionamentos
         public Empresa Empresa { get; set; }
+        public int EmpresaId { get; set; }
 
         //relacionamento entre pessoas   
         public PessoaCliente PessoaCliente { get; set; }

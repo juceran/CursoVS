@@ -22,7 +22,7 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa).OrderBy(d => d.Nome);
+            var salesWebMvcContext = _context.Departamento.Include(d => d.Empresa).OrderBy(d => d.Nome).Where(d => d.Deletado == false);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -68,8 +68,9 @@ namespace SalesWebMvc.Controllers
                 {
                     if(item.Nome == departamento.Nome)
                     {
-                        ViewData["message"] = "Nome do Departamento já existe!";
-                        return RedirectToAction(nameof(Index));
+                        ViewData["Message"] = "Nome do Departamento já existe!";
+                        ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");
+                        return View(departamento);
                     }
                 }
 
@@ -163,7 +164,11 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var departamento = await _context.Departamento.FindAsync(id);
-            _context.Departamento.Remove(departamento);
+            departamento.Ativo = false;
+            departamento.Deletado = true;
+            departamento.DeletadoData = DateTime.Now;
+            _context.Departamento.Update(departamento);
+            //_context.Departamento.Remove(departamento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

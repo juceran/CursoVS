@@ -65,19 +65,22 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Pessoa pessoa)
+        public async Task<IActionResult> Create([Bind("Descricao,EmpresaId")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
             {
+                //var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente).Include(p => p.PessoaFisica).Include(p => p.PessoaFornecedor).Include(p => p.PessoaJuridica).Include(p => p.PessoaUsuario);
+
+                
                 _context.Add(pessoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id", pessoa.Id);
+           // ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id", pessoa.Id);
+           // ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id", pessoa.Id);
+           // ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id", pessoa.Id);
+           // ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id", pessoa.Id);
+           // ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id", pessoa.Id);
             return View(pessoa);
         }
 

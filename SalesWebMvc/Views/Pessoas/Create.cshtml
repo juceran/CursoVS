@@ -22,7 +22,8 @@
             <div class="tab-content clearfix">
                 <div class="tab-pane active" id="pessoa">
                     <div class="form-group">
-                        <input asp-for="Descricao" class="form-control" placeholder="Nome principal"/>
+                        <input asp-for="EmpresaId" class="form-control" type="hidden"/>
+                        <input asp-for="Descricao" class="form-control" placeholder="Nome principal" />
                         <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
                 </div>

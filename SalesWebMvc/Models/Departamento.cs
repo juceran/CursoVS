@@ -16,7 +16,7 @@ namespace SalesWebMvc.Models
         //referencias de relacionamentos
         public Empresa Empresa { get; set; }
         
-        [Display(Name = "Nome do Departamento")]
+        [Display(Name = "Empresa")]
         public int EmpresaId { get; set; }
     }
 }
