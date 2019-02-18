@@ -28,7 +28,9 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="cliente">
-                    <h3>cliente</h3>
+                    <label>
+                        <input asp-for="PessoaCliente.Cliente" /> @Html.DisplayNameFor(model => model.PessoaCliente.Cliente)
+                    </label>
                 </div>
                 <div class="tab-pane" id="email">
                     <h3>email</h3>

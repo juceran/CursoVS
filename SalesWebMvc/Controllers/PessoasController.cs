@@ -22,7 +22,11 @@ namespace SalesWebMvc.Controllers
         // GET: Pessoas
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente).Include(p => p.PessoaFisica).Include(p => p.PessoaFornecedor).Include(p => p.PessoaJuridica).Include(p => p.PessoaUsuario);
+            var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente)
+                                        .Include(p => p.PessoaFisica)
+                                        .Include(p => p.PessoaFornecedor)
+                                        .Include(p => p.PessoaJuridica)
+                                        .Include(p => p.PessoaUsuario);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -69,18 +73,18 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente).Include(p => p.PessoaFisica).Include(p => p.PessoaFornecedor).Include(p => p.PessoaJuridica).Include(p => p.PessoaUsuario);
+                var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente).Include(p => p.PessoaFisica).Include(p => p.PessoaFornecedor).Include(p => p.PessoaJuridica).Include(p => p.PessoaUsuario);
 
                 
                 _context.Add(pessoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-           // ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id", pessoa.Id);
-           // ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id", pessoa.Id);
-           // ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id", pessoa.Id);
-           // ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id", pessoa.Id);
-           // ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id", pessoa.Id);
+            ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id", pessoa.Id);
+            ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id", pessoa.Id);
+            ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id", pessoa.Id);
+            ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id", pessoa.Id);
+            ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id", pessoa.Id);
             return View(pessoa);
         }
 

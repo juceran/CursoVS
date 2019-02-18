@@ -6,10 +6,9 @@ namespace SalesWebMvc.Models
     public class PessoaFornecedor : CamposComuns
     {
         public bool Fornecedor { get; set; }
-        
+
         //Relacionamentos
-        public Pessoa Pessoa { get; set; }
-        [ForeignKey("Pessoa")]
         public int PessoaId { get; set; }
+        public virtual Pessoa Pessoa { get; set; }
     }
 }

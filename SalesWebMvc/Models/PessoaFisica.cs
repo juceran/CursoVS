@@ -8,7 +8,7 @@ namespace SalesWebMvc.Models
 {
     public class PessoaFisica : CamposComuns
     {
-        [Column("varchar(128)")]
+        [Column(TypeName = "varchar(128)")]
         public string Nome { get; set; }
 
         [Column(TypeName = "varchar(128)")]
@@ -33,9 +33,8 @@ namespace SalesWebMvc.Models
         public Sexo Sexo { get; set; }
 
         //referencias de relacionamentos
-        [ForeignKey("Pessoa")]
         public int PessoaId { get; set; }
-        public Pessoa Pessoa { get; set; }
+        public virtual Pessoa Pessoa { get; set; }
 
     }
 }

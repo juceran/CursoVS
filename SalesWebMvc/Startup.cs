@@ -50,10 +50,13 @@ namespace SalesWebMvc
             services.AddScoped<DepartamentoConfiguration>();
             services.AddScoped<PessoaConfiguration>();
             services.AddScoped<PessoaClienteConfiguration>();
+            services.AddScoped<PessoaEmailConfiguration>();
+            services.AddScoped<PessoaEnderecoConfiguration>();
             services.AddScoped<PessoaFisicaConfiguration>();
             services.AddScoped<PessoaFornecedorConfiguration>();
             services.AddScoped<PessoaJuridicaConfiguration>();
             services.AddScoped<PessoaUsuarioConfiguration>();
+            services.AddScoped<PessoaUsuarioSenhaConfiguration>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

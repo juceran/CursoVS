@@ -29,10 +29,10 @@ namespace SalesWebMvc.ContextFluentAPI
                 .HasColumnType("TIMESTAMP");
 
             //relacionamento 1 para 1
-            modelBuilder
+            modelBuilder                
                 .HasOne(p => p.Pessoa)
                 .WithOne(pu => pu.PessoaUsuario)
-                .HasForeignKey<Pessoa>(p => p.Id);
+                .HasForeignKey<PessoaUsuario>(p => p.Id);
         }
     }
 }

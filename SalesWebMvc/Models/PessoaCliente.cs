@@ -8,8 +8,7 @@ namespace SalesWebMvc.Models
         public bool Cliente { get; set; }
 
         //Relacionamentos
-        public Pessoa Pessoa { get; set; }
-        [ForeignKey("Pessoa")]
         public int PessoaId { get; set; }
+        public virtual Pessoa Pessoa { get; set; }              
     }
 }

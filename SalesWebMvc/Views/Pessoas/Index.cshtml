@@ -16,34 +16,22 @@
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaCliente)
+                @Html.DisplayNameFor(model => model.PessoaCliente.Cliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaFisica)
+                @Html.DisplayNameFor(model => model.PessoaFisica.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaFornecedor)
+                @Html.DisplayNameFor(model => model.PessoaFornecedor.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaJuridica)
+                @Html.DisplayNameFor(model => model.PessoaJuridica.Ativo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaUsuario)
+                @Html.DisplayNameFor(model => model.PessoaUsuario.Ativo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCadastro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UltimaAtualizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Deletado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeletadoData)
             </th>
             <th></th>
         </tr>
@@ -55,34 +43,22 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaCliente.Id)
+                @Html.DisplayFor(modelItem => item.PessoaCliente.Cliente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaFisica.Id)
+                @Html.DisplayFor(modelItem => item.PessoaFisica.Ativo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaFornecedor.Id)
+                @Html.DisplayFor(modelItem => item.PessoaFornecedor.Ativo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaJuridica.Id)
+                @Html.DisplayFor(modelItem => item.PessoaJuridica.Ativo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaUsuario.Id)
+                @Html.DisplayFor(modelItem => item.PessoaUsuario.Ativo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UltimaAtualizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Deletado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletadoData)
             </td>
             <td>
                 <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Editar</a>

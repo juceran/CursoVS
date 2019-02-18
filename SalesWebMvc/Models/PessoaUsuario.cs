@@ -15,9 +15,8 @@ namespace SalesWebMvc.Models
         public String Usuario { get; set; }
 
         //referencias de relacionamentos 
-        public Pessoa Pessoa { get; set; }
-        [ForeignKey("Pessoa")]
         public int PessoaId { get; set; }
+        public virtual Pessoa Pessoa { get; set; }
 
         public PessoaUsuarioSenha PessoaUsuarioSenha { get; set; }
     }

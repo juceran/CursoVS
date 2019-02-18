@@ -32,7 +32,7 @@ namespace SalesWebMvc.ContextFluentAPI
             modelBuilder
                 .HasOne(p => p.Pessoa)
                 .WithOne(pc => pc.PessoaFisica)
-                .HasForeignKey<Pessoa>(p => p.Id);
+                .HasForeignKey<PessoaFisica>(p => p.Id);
         }
     }
 }

@@ -44,6 +44,7 @@ namespace SalesWebMvc.Models
         public EnderecoTipo EnderecoTipo { get; set; }
 
         //Relacionamentos
+        public int PessoaId { get; set; }
         public Pessoa Pessoa { get; set; }
     }
 }

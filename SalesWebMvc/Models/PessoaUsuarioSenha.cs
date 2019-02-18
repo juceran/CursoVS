@@ -17,11 +17,9 @@ namespace SalesWebMvc.Models
         [Display(Name = "Senha")]
         public string Senha { get; set; }
 
-        //Relacionamentos        
-        public PessoaUsuario PessoaUsuario { get; set; }
-
-        [ForeignKey("PessoaUsuario")]
+        //Relacionamentos     
         public int PessoaUsuarioId { get; set; }
+        public PessoaUsuario PessoaUsuario { get; set; }
     }
 }
 

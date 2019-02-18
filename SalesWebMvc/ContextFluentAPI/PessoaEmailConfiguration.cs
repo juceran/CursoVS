@@ -5,9 +5,9 @@ using System;
 
 namespace SalesWebMvc.ContextFluentAPI
 {
-    public class PessoaClienteConfiguration : IEntityTypeConfiguration<PessoaCliente>
+    public class PessoaEmailConfiguration : IEntityTypeConfiguration<PessoaEmail>
     {
-        public void Configure(EntityTypeBuilder<PessoaCliente> modelBuilder)
+        public void Configure(EntityTypeBuilder<PessoaEmail> modelBuilder)
         {
             //campos comuns
             modelBuilder
@@ -27,12 +27,6 @@ namespace SalesWebMvc.ContextFluentAPI
             modelBuilder
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP");
-
-            //relacionamento 1 para 1
-            modelBuilder
-                .HasOne(p => p.Pessoa)
-                .WithOne(pc => pc.PessoaCliente)
-                .HasForeignKey<PessoaCliente>(p => p.Id);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace SalesWebMvc.Models
         public TelefoneTipo Tipo { get; set; }
 
         //referencias de relacionamentos
-        public Pessoa Pessoa { get; set; }
+        public int PessoaId { get; set; }
+        public Pessoa Pessoa { get; set; }       
     }
 }
