@@ -22,7 +22,8 @@ namespace SalesWebMvc.Controllers
         // GET: Pessoas
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente)
+            var salesWebMvcContext = _context.Pessoa
+                                        .Include(p => p.PessoaCliente)
                                         .Include(p => p.PessoaFisica)
                                         .Include(p => p.PessoaFornecedor)
                                         .Include(p => p.PessoaJuridica)
@@ -56,12 +57,18 @@ namespace SalesWebMvc.Controllers
         // GET: Pessoas/Create
         public IActionResult Create()
         {
-            ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id");
-            return View();
+            var pessoa = new Pessoa
+            {
+                EmpresaId = 1,
+                DataCadastro = DateTime.Now,
+                UltimaAtualizacao = DateTime.Now,
+                Ativo = true,
+                PessoaCliente = new PessoaCliente(),
+                PessoaFornecedor = new PessoaFornecedor(),
+                PessoaUsuario = new PessoaUsuario()
+            };
+
+            return View(pessoa);
         }
 
         // POST: Pessoas/Create
@@ -69,22 +76,27 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,EmpresaId")] Pessoa pessoa)
+        public async Task<IActionResult> Create([Bind("EmpresaId,Descricao,DataCadastro,Ativo,UltimaAtualizacao,Deletado,DeletadoData," +
+            "PessoaCliente,PessoaFornecedor")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
             {
-                var salesWebMvcContext = _context.Pessoa.Include(p => p.PessoaCliente).Include(p => p.PessoaFisica).Include(p => p.PessoaFornecedor).Include(p => p.PessoaJuridica).Include(p => p.PessoaUsuario);
-
-                
+                if (pessoa.PessoaCliente.Cliente == true)
+                {
+                    pessoa.PessoaCliente.Ativo = true;
+                    pessoa.PessoaCliente.DataCadastro = DateTime.Now;
+                    pessoa.PessoaCliente.UltimaAtualizacao = DateTime.Now;
+                }
+                if (pessoa.PessoaFornecedor.Fornecedor == true)
+                {
+                    pessoa.PessoaFornecedor.Ativo = true;
+                    pessoa.PessoaFornecedor.DataCadastro = DateTime.Now;
+                    pessoa.PessoaFornecedor.UltimaAtualizacao = DateTime.Now;
+                }
                 _context.Add(pessoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id"] = new SelectList(_context.PessoaCliente, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaFisica, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaFornecedor, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaJuridica, "Id", "Id", pessoa.Id);
-            ViewData["Id"] = new SelectList(_context.PessoaUsuario, "Id", "Id", pessoa.Id);
             return View(pessoa);
         }
 

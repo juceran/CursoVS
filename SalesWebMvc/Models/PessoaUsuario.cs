@@ -12,6 +12,7 @@ namespace SalesWebMvc.Models
     public class PessoaUsuario : CamposComuns
     {
         [Column(TypeName = "varchar(64)")]
+        [Display(Name = "Usuário")]
         public String Usuario { get; set; }
 
         //referencias de relacionamentos 

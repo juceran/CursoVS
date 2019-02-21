@@ -25,11 +25,11 @@ namespace SalesWebMvc.Models
         public int? PessoaClienteId { get; set; }
         public PessoaCliente PessoaCliente { get; set; }
 
-        public ICollection<PessoaEmail> PessoaEmails { get; set; } = new List<PessoaEmail>();
-        public int? PessoaEmailId { get; set; }
+        public ICollection<PessoaEmail> PessoaEmail { get; set; } = new List<PessoaEmail>();
+        //public int? PessoaEmailId { get; set; }
 
         public ICollection<PessoaEndereco> PessoaEndereco { get; set; } = new List<PessoaEndereco>();
-        public int? PessoaEnderecoId { get; set; }
+        //public int? PessoaEnderecoId { get; set; }
 
         public int? PessoaFisicaId { get; set; }
         public  PessoaFisica PessoaFisica{ get; set; }
@@ -39,8 +39,7 @@ namespace SalesWebMvc.Models
 
         public int? PessoaJuridicaId { get; set; }
         public  PessoaJuridica PessoaJuridica { get; set; }
-
-        public int? PessoaTelefoneId { get; set; }
+ 
         public ICollection<PessoaTelefone> PessoaTelefone { get; set; } = new List<PessoaTelefone>();
 
         public int? PessoaUsuarioId { get; set; }

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SalesWebMvc.Models.Departamento>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listagem de Departamentos";
 }
 
 <h2>@ViewData["Title"]</h2>
 <h2>@ViewData["Message"]</h2>
 <p>
-    <a asp-action="Create" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Novo</a>
+    <a asp-action="Create" class="btn btn-default" title="Deseja cadastrar novo departamento?"><span class="glyphicon glyphicon-plus-sign"></span> Novo</a>
 </p>
 <table class="table">
     <thead>

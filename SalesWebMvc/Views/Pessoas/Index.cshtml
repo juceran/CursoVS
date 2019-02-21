@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SalesWebMvc.Models.Pessoa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listagem de pessoas";
 }
 
 <h2>@ViewData["Title"]</h2>
-
+<h2>@ViewData["Message"]</h2>
 <p>
-    <a asp-action="Create"class="btn btn-default">Novo</a>
+    <a asp-action="Create" class="btn btn-default" title="Deseja cadastrar nova pessoa?"><span class="glyphicon glyphicon-plus-sign"></span> Novo</a>
 </p>
 <table class="table">
     <thead>
@@ -19,16 +19,16 @@
                 @Html.DisplayNameFor(model => model.PessoaCliente.Cliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaFisica.Ativo)
+                @Html.DisplayNameFor(model => model.PessoaFisica.CPF)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaFornecedor.Ativo)
+                @Html.DisplayNameFor(model => model.PessoaFornecedor.Fornecedor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaJuridica.Ativo)
+                @Html.DisplayNameFor(model => model.PessoaJuridica.CNPJ)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PessoaUsuario.Ativo)
+                @Html.DisplayNameFor(model => model.PessoaUsuario.Usuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
@@ -46,16 +46,16 @@
                 @Html.DisplayFor(modelItem => item.PessoaCliente.Cliente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaFisica.Ativo)
+                @Html.DisplayFor(modelItem => item.PessoaFisica.CPF)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaFornecedor.Ativo)
+                @Html.DisplayFor(modelItem => item.PessoaFornecedor.Fornecedor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaJuridica.Ativo)
+                @Html.DisplayFor(modelItem => item.PessoaJuridica.CNPJ)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PessoaUsuario.Ativo)
+                @Html.DisplayFor(modelItem => item.PessoaUsuario.Usuario)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ativo)

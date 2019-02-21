@@ -32,9 +32,12 @@
     <Compile Remove="Migrations\20190212183718_inicio.Designer.cs" />
     <Compile Remove="Migrations\20190212184015_inicio.cs" />
     <Compile Remove="Migrations\20190212184015_inicio.Designer.cs" />
+    <Compile Remove="Migrations\20190220224934_PESSOACLIENTE.cs" />
+    <Compile Remove="Migrations\20190220224934_PESSOACLIENTE.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BeginCollectionItemCore" Version="1.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">

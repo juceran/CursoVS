@@ -31,8 +31,8 @@ namespace SalesWebMvc.ContextFluentAPI
             //relacionamento 1 para 1
             modelBuilder                
                 .HasOne(p => p.Pessoa)
-                .WithOne(pu => pu.PessoaUsuario)
-                .HasForeignKey<PessoaUsuario>(p => p.Id);
+                .WithOne(p => p.PessoaUsuario)
+                .HasForeignKey<PessoaUsuario>(p => p.PessoaId);
         }
     }
 }
