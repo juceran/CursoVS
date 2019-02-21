@@ -25,7 +25,7 @@ namespace SalesWebMvc.Models
 
         [Display(Name = "Data de Abertura")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
         [Column(TypeName = "Date")]
         public DateTime DataAbertura { get; set; }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.Enums;
 
 namespace SalesWebMvc.Controllers
 {
@@ -65,7 +66,8 @@ namespace SalesWebMvc.Controllers
                 Ativo = true,
                 PessoaCliente = new PessoaCliente(),
                 PessoaFornecedor = new PessoaFornecedor(),
-                PessoaUsuario = new PessoaUsuario()
+                PessoaUsuario = new PessoaUsuario(),
+                PessoaFisica = new PessoaFisica()                
             };
 
             return View(pessoa);
@@ -77,7 +79,7 @@ namespace SalesWebMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmpresaId,Descricao,DataCadastro,Ativo,UltimaAtualizacao,Deletado,DeletadoData," +
-            "PessoaCliente,PessoaFornecedor")] Pessoa pessoa)
+            "PessoaCliente,PessoaFornecedor,PessoaFisica")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +94,10 @@ namespace SalesWebMvc.Controllers
                     pessoa.PessoaFornecedor.Ativo = true;
                     pessoa.PessoaFornecedor.DataCadastro = DateTime.Now;
                     pessoa.PessoaFornecedor.UltimaAtualizacao = DateTime.Now;
+                }
+                if(pessoa.PessoaFisica != null)
+                {
+
                 }
                 _context.Add(pessoa);
                 await _context.SaveChangesAsync();

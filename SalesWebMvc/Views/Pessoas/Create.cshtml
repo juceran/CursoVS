@@ -8,35 +8,46 @@
 <h4>@ViewData["Message"]</h4>
 <hr />
 <div class="row">
-    <div class="container">
+    <div id="" class="container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <ul class="nav nav-pills" role="tab">
                 <li class="active"> <a href="#pessoa" data-toggle="tab">Pessoa</a></li>
-                <li>                <a href="#cliente" data-toggle="tab">Cliente</a></li>
-                <li>                <a href="#fornecedor" data-toggle="tab">Fornecedor</a></li>
+                <li>                <a href="#fisica" data-toggle="tab">Fisica</a></li>
+                <li>                <a href="#juridica" data-toggle="tab">Juridica</a></li>
                 <li>                <a href="#usuario" data-toggle="tab">Usuário</a></li>
                 <li>                <a href="#email" data-toggle="tab">Email</a></li>
                 <li>                <a href="#endereco" data-toggle="tab">Endereço</a></li>
 
             </ul>
             <div class="tab-content clearfix">
-                <div class="tab-pane active col-md-4" id="pessoa">
-                    <div class="form-group">
+                <div class="tab-pane active" id="pessoa">
+                    <div class="form-group col-md-9">
                         <input asp-for="EmpresaId" class="form-control" type="hidden" />
-                        <input asp-for="UltimaAtualizacao" class="form-control" type="hidden" />
-                        <input asp-for="Deletado" class="form-control" type="hidden" />
-                        <input asp-for="DeletadoData" class="form-control" type="hidden" />
 
                         <label asp-for="Descricao" class="control-label"></label>
                         <input asp-for="Descricao" class="form-control" placeholder="Nome principal" />
                         <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-3">
                         <label asp-for="DataCadastro" control-label"></label>
                         <input asp-for="DataCadastro" class="form-control" />
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="PessoaCliente.Cliente" /> @Html.DisplayNameFor(model => model.PessoaCliente.Cliente)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="PessoaFornecedor.Fornecedor" /> @Html.DisplayNameFor(model => model.PessoaFornecedor.Fornecedor)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
                         <div class="checkbox">
                             <label>
                                 <input asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
@@ -44,16 +55,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="cliente">
+                <div class="tab-pane" id="fisica">
                     <div class="form-group col-md-4">
+                        <label asp-for="PessoaFisica.CPF" class="control-label"></label>
+                        <input asp-for="PessoaFisica.CPF" class="form-control" placeholder="C.P.F." onkeypress="return SomenteNumero(event);" onBlur="ValidarCPForCNPJ(this,this.value);" onkeyup="FormataCPForCNPJ(this,event);" maxlength="18" />
+                        <span asp-validation-for="PessoaFisica.CPF" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaFisica.RG" class="control-label"></label>
+                        <input asp-for="PessoaFisica.RG" class="form-control" placeholder="Número do R.G." />
+                        <span asp-validation-for="PessoaFisica.RG" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaFisica.Sexo" class="control-label"></label>
+                        <select asp-for="PessoaFisica.Sexo" asp-items="Html.GetEnumSelectList<SalesWebMvc.Models.Enums.Sexo>()" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <label asp-for="PessoaFisica.Nome" class="control-label"></label>
+                        <input asp-for="PessoaFisica.Nome" class="form-control" placeholder="Nome" />
+                        <span asp-validation-for="PessoaFisica.Nome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="PessoaFisica.DataNascimento" control-label"></label>
+                        <input asp-for="PessoaFisica.DataNascimento" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PessoaFisica.Pai" class="control-label"></label>
+                        <input asp-for="PessoaFisica.Pai" class="form-control" placeholder="Nome do Pai" />
+                        <span asp-validation-for="PessoaFisica.Pai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PessoaFisica.Mae" class="control-label"></label>
+                        <input asp-for="PessoaFisica.Mae" class="form-control" placeholder="Nome da Mãe" />
+                        <span asp-validation-for="PessoaFisica.Mae" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input asp-for="PessoaCliente.Cliente" /> @Html.DisplayNameFor(model => model.PessoaCliente.Cliente)
+                                <input asp-for="PessoaFisica.Ativo" /> @Html.DisplayNameFor(model => model.PessoaFisica.Ativo)
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="fornecedor">
+                <div class="tab-pane" id="juridica">
                     <div class="form-group col-md-4">
                         <div class="checkbox">
                             <label>

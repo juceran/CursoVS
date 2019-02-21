@@ -39,8 +39,8 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Remover caracteres do CNPJ
-                CNPJ = RemoverCaracteres.StringNova(login.CNPJ);
+                //Remover caracteres do CPForCNPJ
+                CNPJ = RemoverCaracteres.StringSemFormatacao(login.CNPJ);
 
                 //testar se a empresa existe e qual o banco de dados
                 IQueryable<Empresa> empresa =  _context.Empresa

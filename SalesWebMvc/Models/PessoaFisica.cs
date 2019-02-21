@@ -1,6 +1,7 @@
 ﻿using SalesWebMvc.Models.Base;
 using SalesWebMvc.Models.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,11 +28,11 @@ namespace SalesWebMvc.Models
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         //enums
-        public Sexo Sexo { get; set; }
-
+        public Sexo? Sexo { get; set; }
+        
         //referencias de relacionamentos
         public int PessoaId { get; set; }
         public virtual Pessoa Pessoa { get; set; }

@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using SalesWebMvc.Models.Enums;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SalesWebMvc.Controllers
 {
@@ -22,7 +22,12 @@ namespace SalesWebMvc.Controllers
         // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.OrderBy(e => e.RazaoSocial).ToListAsync());
+            var salesWebMvcContext = _context.Empresa.OrderBy(e => e.RazaoSocial).Where(e => e.Deletado == false);
+            foreach (var item in salesWebMvcContext)
+            {
+                item.CNPJ = FormatarString.FormatCPForCNPJ(item.CNPJ);
+            }
+            return View(await salesWebMvcContext.ToListAsync());
         }
 
         // GET: Empresas/Details/5
@@ -45,7 +50,7 @@ namespace SalesWebMvc.Controllers
 
         // GET: Empresas/Create
         public IActionResult Create()
-        {
+        {        
             return View();
         }
 
@@ -73,11 +78,13 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa.FindAsync(id);
+            var empresa = await _context.Empresa.FindAsync(id);            
             if (empresa == null)
             {
                 return NotFound();
             }
+            empresa.CNPJ = FormatarString.FormatCPForCNPJ(empresa.CNPJ);
+            empresa.UltimaAtualizacao = DateTime.Now;
             return View(empresa);
         }
 
@@ -86,7 +93,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro")] Empresa empresa)
         {
             if (id != empresa.Id)
             {
@@ -97,6 +104,12 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
+                    //Remover caracteres do CPForCNPJ
+                    empresa.CNPJ = RemoverCaracteres.StringSemFormatacao(empresa.CNPJ);
+                    if(empresa.Deletado != true)
+                    {
+                        empresa.Deletado = false;
+                    }
                     _context.Update(empresa);
                     await _context.SaveChangesAsync();
                 }

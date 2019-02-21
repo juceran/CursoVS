@@ -4,7 +4,7 @@ namespace SalesWebMvc.Comuns
 {
     class RemoverCaracteres
     {
-        public static string StringNova(string str)
+        public static string StringSemFormatacao(string str)
         {
             if (str != null)
             {
