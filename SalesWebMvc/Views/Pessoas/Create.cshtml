@@ -99,9 +99,34 @@
                 </div>
                 <div class="tab-pane" id="juridica">
                     <div class="form-group col-md-4">
+                        <label asp-for="PessoaJuridica.CNPJ" class="control-label"></label>
+                        <input asp-for="PessoaJuridica.CNPJ" class="form-control" placeholder="C.N.P.J." onkeypress="return SomenteNumero(event);" onBlur="ValidarCPForCNPJ(this,this.value);" onkeyup="FormataCPForCNPJ(this,event);" maxlength="18" />
+                        <span asp-validation-for="PessoaJuridica.CNPJ" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaJuridica.IE" class="control-label"></label>
+                        <input asp-for="PessoaJuridica.IE" class="form-control" placeholder="Isncrição Estadual" />
+                        <span asp-validation-for="PessoaJuridica.IE" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaJuridica.DataAbertura" class="control-label"></label>
+                        <input asp-for="PessoaJuridica.DataAbertura" class="form-control" />
+                        <span asp-validation-for="PessoaJuridica.DataAbertura" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PessoaJuridica.RazaoSocial" class="control-label"></label>
+                        <input asp-for="PessoaJuridica.RazaoSocial" class="form-control" placeholder="Razão Social"/>
+                        <span asp-validation-for="PessoaJuridica.RazaoSocial" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="PessoaJuridica.Fantasia" class="control-label"></label>
+                        <input asp-for="PessoaJuridica.Fantasia" class="form-control" placeholder="Nome Fantasia"/>
+                        <span asp-validation-for="PessoaJuridica.Fantasia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
                         <div class="checkbox">
                             <label>
-                                <input asp-for="PessoaFornecedor.Fornecedor" /> @Html.DisplayNameFor(model => model.PessoaFornecedor.Fornecedor)
+                                <input asp-for="PessoaJuridica.Ativo" /> @Html.DisplayNameFor(model => model.PessoaJuridica.Ativo)
                             </label>
                         </div>
                     </div>

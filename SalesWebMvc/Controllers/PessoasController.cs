@@ -67,7 +67,7 @@ namespace SalesWebMvc.Controllers
                 PessoaCliente = new PessoaCliente(),
                 PessoaFornecedor = new PessoaFornecedor(),
                 PessoaUsuario = new PessoaUsuario(),
-                PessoaFisica = new PessoaFisica()                
+                PessoaJuridica = new PessoaJuridica()                
             };
 
             return View(pessoa);
@@ -79,7 +79,7 @@ namespace SalesWebMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmpresaId,Descricao,DataCadastro,Ativo,UltimaAtualizacao,Deletado,DeletadoData," +
-            "PessoaCliente,PessoaFornecedor,PessoaFisica")] Pessoa pessoa)
+            "PessoaCliente,PessoaFornecedor,PessoaFisica,PessoaJuridica")] Pessoa pessoa)
         {
             if (ModelState.IsValid)
             {

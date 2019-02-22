@@ -29,7 +29,7 @@ namespace SalesWebMvc.Models
         [Display(Name = "Data de Abertura")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
-        public DateTime DataAbertura { get; set; }
+        public DateTime? DataAbertura { get; set; }
 
         //https://www.receitaws.com.br/v1/cnpj/70000401000127
         //campos que retornam da consulta ao site receita
@@ -39,8 +39,8 @@ namespace SalesWebMvc.Models
         [Column(TypeName = "Date")]
         [Display(Name = "Data de Situação")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DataSituacao { get; set; }
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
+        public DateTime? DataSituacao { get; set; }
 
         public string MotivoSituacao { get; set; }
 
