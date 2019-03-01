@@ -2,18 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SalesWebMvc.Context;
 
 namespace SalesWebMvc.Migrations
 {
-    [DbContext(typeof(SalesWebMvcContext))]
-    [Migration("20190221011025_renew")]
-    partial class renew
+    [DbContext(typeof(ComumContext))]
+    partial class ComumContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,18 +24,14 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 257, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 148, DateTimeKind.Local));
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -51,17 +45,13 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 257, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 148, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmpresaId");
 
                     b.ToTable("Departamento");
-
-                    b.HasData(
-                        new { Id = 1, Ativo = true, DataCadastro = new DateTime(2019, 2, 20, 22, 10, 25, 257, DateTimeKind.Local), Deletado = false, EmpresaId = 1, Nome = "RECURSOS HUMANOS" }
-                    );
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.Empresa", b =>
@@ -69,9 +59,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("Bairro")
                         .HasColumnType("varchar(64)");
@@ -82,23 +70,24 @@ namespace SalesWebMvc.Migrations
                     b.Property<string>("CNPJ")
                         .HasColumnType("varchar(16)");
 
+                    b.Property<string>("Cidade")
+                        .HasColumnType("varchar(64)");
+
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(128)");
 
-                    b.Property<DateTime>("DataAbertura")
+                    b.Property<DateTime?>("DataAbertura")
                         .HasColumnType("Date");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 253, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 146, DateTimeKind.Local));
 
                     b.Property<string>("Database")
                         .HasColumnType("varchar(64)");
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -118,10 +107,10 @@ namespace SalesWebMvc.Migrations
                     b.Property<string>("IE")
                         .HasColumnType("varchar(32)");
 
-                    b.Property<string>("Localidade")
+                    b.Property<string>("Logradouro")
                         .HasColumnType("varchar(64)");
 
-                    b.Property<string>("Logradouro")
+                    b.Property<string>("Numero")
                         .HasColumnType("varchar(64)");
 
                     b.Property<string>("RazaoSocial")
@@ -134,7 +123,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 253, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 147, DateTimeKind.Local));
 
                     b.Property<string>("Unidade")
                         .HasColumnType("varchar(16)");
@@ -145,10 +134,6 @@ namespace SalesWebMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Empresa");
-
-                    b.HasData(
-                        new { Id = 1, Ativo = true, Bairro = "SERRARIA", CEP = "57046055", CNPJ = "70000401000127", DataAbertura = new DateTime(1994, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), DataCadastro = new DateTime(2019, 2, 20, 22, 10, 25, 255, DateTimeKind.Local), Database = "Comum", Email = "juceran@gmail.com", Fantasia = "CETASISTEMAS", IE = "ISENTO", RazaoSocial = "JUCERAN CAVALCANTE ME", Uf = "AL", Website = "www.cetasistemas.com.br" }
-                    );
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.Pessoa", b =>
@@ -156,18 +141,14 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 258, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 148, DateTimeKind.Local));
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -178,20 +159,10 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<int>("EmpresaId");
 
-                    b.Property<int?>("PessoaClienteId");
-
-                    b.Property<int?>("PessoaFisicaId");
-
-                    b.Property<int?>("PessoaFornecedorId");
-
-                    b.Property<int?>("PessoaJuridicaId");
-
-                    b.Property<int?>("PessoaUsuarioId");
-
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 258, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 148, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -205,30 +176,28 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<bool>("Cliente");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 260, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 150, DateTimeKind.Local));
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
+
+                    b.Property<decimal?>("LimiteCredito");
 
                     b.Property<int>("PessoaId");
 
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 260, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 150, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -247,7 +216,7 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<DateTime?>("DataCadastro");
 
-                    b.Property<bool?>("Deletado");
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData");
 
@@ -287,7 +256,7 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<DateTime?>("DataCadastro");
 
-                    b.Property<bool?>("Deletado");
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData");
 
@@ -328,9 +297,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("CPF")
                         .HasColumnType("varchar(16)");
@@ -338,14 +305,12 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 264, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 151, DateTimeKind.Local));
 
-                    b.Property<DateTime>("DataNascimento")
+                    b.Property<DateTime?>("DataNascimento")
                         .HasColumnType("Date");
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -364,12 +329,12 @@ namespace SalesWebMvc.Migrations
                     b.Property<string>("RG")
                         .HasColumnType("varchar(64)");
 
-                    b.Property<int>("Sexo");
+                    b.Property<int?>("Sexo");
 
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 264, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 151, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -384,18 +349,14 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 267, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 153, DateTimeKind.Local));
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -407,7 +368,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 267, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 153, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -422,29 +383,25 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("CNPJ")
                         .HasColumnType("varchar(16)");
 
                     b.Property<string>("Complemento");
 
-                    b.Property<DateTime>("DataAbertura")
+                    b.Property<DateTime?>("DataAbertura")
                         .HasColumnType("Date");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 269, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 154, DateTimeKind.Local));
 
-                    b.Property<DateTime>("DataSituacao")
+                    b.Property<DateTime?>("DataSituacao")
                         .HasColumnType("Date");
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -468,7 +425,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 269, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 154, DateTimeKind.Local));
 
                     b.HasKey("Id");
 
@@ -487,7 +444,7 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<DateTime?>("DataCadastro");
 
-                    b.Property<bool?>("Deletado");
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData");
 
@@ -513,18 +470,14 @@ namespace SalesWebMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<bool>("Ativo");
 
                     b.Property<DateTime?>("DataCadastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 272, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 156, DateTimeKind.Local));
 
-                    b.Property<bool?>("Deletado")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData")
                         .HasColumnType("TIMESTAMP");
@@ -534,7 +487,7 @@ namespace SalesWebMvc.Migrations
                     b.Property<DateTime?>("UltimaAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP")
-                        .HasDefaultValue(new DateTime(2019, 2, 20, 22, 10, 25, 272, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2019, 2, 28, 21, 11, 28, 156, DateTimeKind.Local));
 
                     b.Property<string>("Usuario")
                         .HasColumnType("varchar(64)");
@@ -556,7 +509,7 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<DateTime?>("DataCadastro");
 
-                    b.Property<bool?>("Deletado");
+                    b.Property<bool>("Deletado");
 
                     b.Property<DateTime?>("DeletadoData");
 

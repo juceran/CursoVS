@@ -2,8 +2,9 @@
 {
     public enum EnderecoTipo : int
     {
-        pessoal = 1,
-        comercial = 2,
-        cobranca = 3
+        Pessoal = 1,
+        Comercial = 2,
+        Cobranca = 3,
+        Entrega = 4
     }
 }

@@ -25,7 +25,7 @@ namespace SalesWebMvc.Controllers
             var salesWebMvcContext = _context.Empresa.OrderBy(e => e.RazaoSocial).Where(e => e.Deletado == false);
             foreach (var item in salesWebMvcContext)
             {
-                item.CNPJ = FormatarString.FormatCPForCNPJ(item.CNPJ);
+                item.CNPJ = FormatarString.FormateCPForCNPJ(item.CNPJ);
             }
             return View(await salesWebMvcContext.ToListAsync());
         }
@@ -50,8 +50,13 @@ namespace SalesWebMvc.Controllers
 
         // GET: Empresas/Create
         public IActionResult Create()
-        {        
-            return View();
+        {
+            Empresa empresa = new Empresa
+            {
+                Ativo = true,
+                DataCadastro = DateTime.Now
+            };
+            return View(empresa);
         }
 
         // POST: Empresas/Create
@@ -59,10 +64,11 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Numero,Complemento,Bairro,Cidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
+                empresa.CNPJ = RemoverCaracteres.StringSemFormatacao(empresa.CNPJ);
                 _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -83,7 +89,7 @@ namespace SalesWebMvc.Controllers
             {
                 return NotFound();
             }
-            empresa.CNPJ = FormatarString.FormatCPForCNPJ(empresa.CNPJ);
+            empresa.CNPJ = FormatarString.FormateCPForCNPJ(empresa.CNPJ);
             empresa.UltimaAtualizacao = DateTime.Now;
             return View(empresa);
         }
@@ -93,7 +99,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Complemento,Bairro,Localidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("Database,CNPJ,IE,RazaoSocial,Fantasia,DataAbertura,Email,Website,CEP,Logradouro,Numero,Complemento,Bairro,Cidade,Uf,Unidade,IBGE,GIA,Id,Ativo,DataCadastro")] Empresa empresa)
         {
             if (id != empresa.Id)
             {

@@ -27,7 +27,7 @@ namespace SalesWebMvc.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
         [Column(TypeName = "Date")]
-        public DateTime DataAbertura { get; set; }
+        public DateTime? DataAbertura { get; set; }
 
         [Column(TypeName = "varchar(64)")]
         [Display(Name = "e-mail")]
@@ -44,15 +44,19 @@ namespace SalesWebMvc.Models
         [MinLength(2, ErrorMessage = "Logradouro deve ter pelo menos 2 caracteres")]
         public string Logradouro { get; set; }
 
+        [Column(TypeName = "varchar(64)")]
+        [Display(Name = "Número")]
+        public string Numero { get; set; }
+
         [Column(TypeName = "varchar(128)")]
         public string Complemento { get; set; }
 
         [Column(TypeName = "varchar(64)")]
-        //[RequiredAttribute(ErrorMessage = "Município é obrigatório")]
+        //[RequiredAttribute(ErrorMessage = "Bairro é obrigatório")]
         public string Bairro { get; set; }
 
         [Column(TypeName = "varchar(64)")]
-        public string Localidade { get; set; }
+        public string Cidade { get; set; }
 
         [Required(ErrorMessage = "A sigla do estado é um campo obrigatório!")]
         [StringLength(2, MinimumLength = 2, ErrorMessage = "A sigla do estado deve ter 2 caracteres!")]
@@ -66,9 +70,5 @@ namespace SalesWebMvc.Models
 
         [Column(TypeName = "varchar(64)")]
         public string GIA { get; set; }
-        //referencias de relacionamentos
-        //public Pessoa Pessoa { get; set; }
-        //public Departamento Departamento { get; set; }
-
     }
 }

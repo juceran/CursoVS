@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SalesWebMvc.Controllers
 {
@@ -14,7 +11,7 @@ namespace SalesWebMvc.Controllers
     {
         private readonly ComumContext _context;
         private readonly SalesWebMvcContext _contextAplicacao;
-
+        
         public LoginsController(ComumContext context, SalesWebMvcContext contextAplicacao)
         {
             _context = context;
@@ -29,7 +26,7 @@ namespace SalesWebMvc.Controllers
         public string Senha { get; set; }
 
         public IActionResult Login()
-        {
+        {           
             return View();
         }
 
@@ -43,23 +40,30 @@ namespace SalesWebMvc.Controllers
                 CNPJ = RemoverCaracteres.StringSemFormatacao(login.CNPJ);
 
                 //testar se a empresa existe e qual o banco de dados
-                IQueryable<Empresa> empresa =  _context.Empresa
+                IQueryable<Empresa> empresaComum = _context.Empresa
                     .Where(e => e.CNPJ == CNPJ)
                     .Where(e => e.Ativo == true);
                 string database = "";
-                foreach (Empresa p in empresa)
+                foreach (Empresa p in empresaComum)
                 {
                     database = p.Database;
                 }
                 if (database != "")
                 {
                     Program.BancoDeDadosAplicacao = database;
+                    if (Program.BancoDeDadosAplicacao != null)
+                    {
 
+                    }
                     //verifica o acesso do usuario na base da aplicacao
-                    IQueryable<Departamento> departamento = _contextAplicacao.Departamento
-                        .Include(e => e.Empresa)
-                        .Where(e => e.Empresa.Database == database)
+                    IQueryable<Empresa> empresaAplicacao = _contextAplicacao.Empresa
+                        .Where(e => e.CNPJ == CNPJ)
+                        .Where(e => e.Database == database)
                         .Where(x => x.Ativo == true);
+                    foreach (Empresa item in empresaAplicacao)
+                    {
+                        Program.UserEmpresaId = item.Id;
+                    }
 
                     bool loginOk = login.ValidarLogin();
                 }
@@ -70,13 +74,13 @@ namespace SalesWebMvc.Controllers
 
 
 
-                return RedirectToAction("Index", "Empresas");
+                return RedirectToAction("Index", "Pessoas");
             }
             else
             {
                 return RedirectToAction("Index", "Departamentos");
             }
-                
+
         }
     }
 }

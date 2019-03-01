@@ -4,7 +4,7 @@ namespace SalesWebMvc.Comuns
 {
     public class FormatarString
     {
-        public static string FormatCPForCNPJ(string str)
+        public static string FormateCPForCNPJ(string str)
         {
             if (str.Length == 11 || str.Length == 14)
             {

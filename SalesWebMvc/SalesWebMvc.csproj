@@ -34,10 +34,14 @@
     <Compile Remove="Migrations\20190212184015_inicio.Designer.cs" />
     <Compile Remove="Migrations\20190220224934_PESSOACLIENTE.cs" />
     <Compile Remove="Migrations\20190220224934_PESSOACLIENTE.Designer.cs" />
+    <Compile Remove="Migrations\20190227200130_Inicio.cs" />
+    <Compile Remove="Migrations\20190227200409_Inicio.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ACBr.Net.Core" Version="1.2.3.3" />
     <PackageReference Include="BeginCollectionItemCore" Version="1.0.8" />
+    <PackageReference Include="jQuery.InputMask" Version="4.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">

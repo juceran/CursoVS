@@ -11,9 +11,6 @@ namespace SalesWebMvc.ContextFluentAPI
         {
             //campos comuns
             modelBuilder
-                .Property(p => p.Ativo)
-                .HasDefaultValue(true);
-            modelBuilder
                 .Property(p => p.DataCadastro)
                 .HasColumnType("TIMESTAMP")
                 .HasDefaultValue(DateTime.Now);
@@ -21,9 +18,6 @@ namespace SalesWebMvc.ContextFluentAPI
                 .Property(p => p.UltimaAtualizacao)
                 .HasColumnType("TIMESTAMP")
                 .HasDefaultValue(DateTime.Now);
-            modelBuilder
-                .Property(p => p.Deletado)
-                .HasDefaultValue(false);
             modelBuilder
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP");
@@ -33,6 +27,13 @@ namespace SalesWebMvc.ContextFluentAPI
                 .HasOne(p => p.Pessoa)
                 .WithOne(p => p.PessoaFornecedor)
                 .HasForeignKey<PessoaFornecedor>(p => p.PessoaId);
+
+            /* Inserir dados no banco */
+            //modelBuilder
+            //    .HasData(
+            //    new PessoaFornecedor { Id = 1, Ativo = true, DataCadastro = DateTime.Now, UltimaAtualizacao = DateTime.Now, Deletado = false, PessoaId = 1, Fornecedor = true},
+            //    new PessoaFornecedor { Id = 2, Ativo = true, DataCadastro = DateTime.Now, UltimaAtualizacao = DateTime.Now, Deletado = false, PessoaId = 2, Fornecedor = true }
+            //    );
         }
     }
 }

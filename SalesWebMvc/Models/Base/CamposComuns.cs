@@ -9,6 +9,8 @@ namespace SalesWebMvc.Models.Base
         //campos comuns nas tabelas
         public int Id { get; set; }
        
+        [Required]
+        [DefaultValue(true)]
         public bool Ativo { get; set; }
 
         [Display(Name = "Data de Cadastro")]
@@ -20,8 +22,10 @@ namespace SalesWebMvc.Models.Base
         [DataType(DataType.DateTime)]
         public DateTime? UltimaAtualizacao { get; set; }
 
-        public bool? Deletado { get; set; }
-
+        [Required]
+        [DefaultValue(false)]
+        public bool Deletado { get; set; }
+       
         [Display(Name = "Data de Exclusão")]
         [DataType(DataType.DateTime)]
         public DateTime? DeletadoData { get; set; }

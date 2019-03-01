@@ -27,7 +27,7 @@ namespace SalesWebMvc.Models
         [Column(TypeName = "Date")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}")]
         public DateTime? DataNascimento { get; set; }
 
         //enums

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Globalization;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMvc.Context;
-using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.ContextFluentAPI;
 
 namespace SalesWebMvc
@@ -36,15 +29,19 @@ namespace SalesWebMvc
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSession();
 
             //conexão com banco de dados " + Program.BancoDeDadosAplicacao + "
-            services.AddDbContext<ComumContext>         (options => options.UseNpgsql("Host=localhost;Database=Comum;Username=WODINPASS;Password=(*5523bASS%$12_."));
-            services.AddDbContext<NovoContext>          (options => options.UseNpgsql("Host=localhost;Database=Novo;Username=WODINPASS;Password=(*5523bASS%$12_."));
-            services.AddDbContext<SalesWebMvcContext>   (options => options.UseNpgsql("Host=localhost;Database=SalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
-
+            services.AddDbContext<ComumContext>(options => options.UseNpgsql("Host=localhost;Database=Comum;Username=WODINPASS;Password=(*5523bASS%$12_."));
+            services.AddDbContext<NovoContext>(options => options.UseNpgsql("Host=localhost;Database=Novo;Username=WODINPASS;Password=(*5523bASS%$12_."));
+            services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=SalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
+            if (Program.BancoDeDadosAplicacao != null)
+            {
+                services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=" + Program.BancoDeDadosAplicacao + ";Username=WODINPASS;Password=(*5523bASS%$12_."));
+            }
+            
+            
             //injeçao de dependência para personalizar a criação do campos no banco de dados, FluentAPI - Contexts
             services.AddScoped<EmpresaConfiguration>();
             services.AddScoped<DepartamentoConfiguration>();

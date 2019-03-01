@@ -13,12 +13,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <ul class="nav nav-pills" role="tab">
                 <li class="active"> <a href="#pessoa" data-toggle="tab">Pessoa</a></li>
+                <li>                <a href="#cliente" data-toggle="tab">Cliente</a></li>
+                <li>                <a href="#fornecedor" data-toggle="tab">Fornecedor</a></li>
                 <li>                <a href="#fisica" data-toggle="tab">Fisica</a></li>
                 <li>                <a href="#juridica" data-toggle="tab">Juridica</a></li>
                 <li>                <a href="#usuario" data-toggle="tab">Usuário</a></li>
                 <li>                <a href="#email" data-toggle="tab">Email</a></li>
                 <li>                <a href="#endereco" data-toggle="tab">Endereço</a></li>
-
+                <li>                <a href="#funcionario" data-toggle="tab">Funcionário</a></li>
             </ul>
             <div class="tab-content clearfix">
                 <div class="tab-pane active" id="pessoa">
@@ -53,6 +55,18 @@
                                 <input asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
                             </label>
                         </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="cliente">
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaCliente.LimiteCredito" class="control-label"></label>
+                        <input asp-for="PessoaCliente.LimiteCredito" class="form-control"   placeholder="Valor do Limite de Crédito" />
+                        <span asp-validation-for="PessoaCliente.LimiteCredito" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="tab-pane" id="fornecedor">
+                    <div class="form-group col-md-4">
+                        <h3>fornecedor</h3>
                     </div>
                 </div>
                 <div class="tab-pane" id="fisica">
@@ -105,7 +119,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label asp-for="PessoaJuridica.IE" class="control-label"></label>
-                        <input asp-for="PessoaJuridica.IE" class="form-control" placeholder="Isncrição Estadual" />
+                        <input asp-for="PessoaJuridica.IE" class="form-control" placeholder="Inscrição Estadual" />
                         <span asp-validation-for="PessoaJuridica.IE" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
@@ -115,12 +129,12 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="PessoaJuridica.RazaoSocial" class="control-label"></label>
-                        <input asp-for="PessoaJuridica.RazaoSocial" class="form-control" placeholder="Razão Social"/>
+                        <input asp-for="PessoaJuridica.RazaoSocial" class="form-control" placeholder="Razão Social" />
                         <span asp-validation-for="PessoaJuridica.RazaoSocial" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="PessoaJuridica.Fantasia" class="control-label"></label>
-                        <input asp-for="PessoaJuridica.Fantasia" class="form-control" placeholder="Nome Fantasia"/>
+                        <input asp-for="PessoaJuridica.Fantasia" class="form-control" placeholder="Nome Fantasia" />
                         <span asp-validation-for="PessoaJuridica.Fantasia" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-12">
@@ -136,10 +150,6 @@
                         <label asp-for="PessoaUsuario.Usuario" class="control-label"></label>
                         <input asp-for="PessoaUsuario.Usuario" class="form-control" placeholder="Usuario" />
                         <span asp-validation-for="PessoaUsuario.Usuario" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PessoaUsuario.DataCadastro" control-label"></label>
-                        <input asp-for="PessoaUsuario.DataCadastro" class="form-control" />
                     </div>
                     <div class="form-group col-md-4">
                         <div class="checkbox">
@@ -157,7 +167,11 @@
                 <div class="tab-pane" id="endereco">
                     <h3>endereço</h3>
                 </div>
-
+                <div class="tab-pane" id="funcionario">
+                    <div class="form-group col-md-4">
+                        <h3>funcionario</h3>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-success" />
@@ -168,6 +182,7 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }
 
 

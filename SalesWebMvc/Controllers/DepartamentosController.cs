@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
 {
+    //[Authorize(Policy = "UsuarioLogado")]
     public class DepartamentosController : Controller
     {
         private readonly SalesWebMvcContext _context;
@@ -22,7 +24,11 @@ namespace SalesWebMvc.Controllers
         // GET: Departamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.Departamento.Include(e => e.Empresa).OrderBy(d => d.Nome).Where(d => d.Deletado == false);
+            var salesWebMvcContext = _context.Departamento
+                                        .Include(e => e.Empresa)
+                                        .OrderBy(d => d.Nome)
+                                        .Where(d => d.Deletado == false)
+                                        .Where(d => d.EmpresaId == Program.UserEmpresaId);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
