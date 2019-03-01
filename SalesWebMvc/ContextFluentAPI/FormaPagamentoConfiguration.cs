@@ -5,10 +5,20 @@ using System;
 
 namespace SalesWebMvc.ContextFluentAPI
 {
-    public class PessoaFornecedorConfiguration : IEntityTypeConfiguration<PessoaFornecedor>
+    public class FormaPagamentoConfiguration : IEntityTypeConfiguration<FormaPagamento>
     {
-        public void Configure(EntityTypeBuilder<PessoaFornecedor> modelBuilder)
+        public void Configure(EntityTypeBuilder<FormaPagamento> modelBuilder)
         {
+            modelBuilder
+                .Property(P => P.CartaoCredito)
+                .HasDefaultValue(false);
+            modelBuilder
+                .Property(p => p.GeraFinanceiro)
+                .HasDefaultValue(true);
+            modelBuilder
+                .Property(p => p.BaixaLancamento)
+                .HasDefaultValue(false);
+            
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)
@@ -28,18 +38,7 @@ namespace SalesWebMvc.ContextFluentAPI
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP");
 
-            //relacionamento 1 para 1
-            modelBuilder
-                .HasOne(p => p.Pessoa)
-                .WithOne(p => p.PessoaFornecedor)
-                .HasForeignKey<PessoaFornecedor>(p => p.PessoaId);
 
-            /* Inserir dados no banco */
-            //modelBuilder
-            //    .HasData(
-            //    new PessoaFornecedor { Id = 1, Ativo = true, DataCadastro = DateTime.Now, UltimaAtualizacao = DateTime.Now, Deletado = false, PessoaId = 1, Fornecedor = true},
-            //    new PessoaFornecedor { Id = 2, Ativo = true, DataCadastro = DateTime.Now, UltimaAtualizacao = DateTime.Now, Deletado = false, PessoaId = 2, Fornecedor = true }
-            //    );
         }
     }
 }

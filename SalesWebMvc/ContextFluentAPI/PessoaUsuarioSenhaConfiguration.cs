@@ -9,6 +9,12 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<PessoaUsuarioSenha> modelBuilder)
         {
+            modelBuilder
+                .Property(p => p.Ativo)
+                .HasDefaultValue(true);
+            modelBuilder
+                .Property(p => p.Deletado)
+                .HasDefaultValue(false);
             /* Inserir dados no banco */
             //modelBuilder
             //    .HasData(

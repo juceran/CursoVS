@@ -2,7 +2,7 @@
 {
     public enum EmailTipo : int
     {
-        pessoal = 1,
-        comercial = 2
+        Pessoal = 1,
+        Comercial = 2
     }
 }

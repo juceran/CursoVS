@@ -2,9 +2,9 @@
 {
     public enum TelefoneTipo : int
     {
-        pessoa = 1,
-        comercial = 2,
-        trabalho = 3,
-        residencial = 4
+        Pessoa = 1,
+        Comercial = 2,
+        Trabalho = 3,
+        Residencial = 4
     }
 }

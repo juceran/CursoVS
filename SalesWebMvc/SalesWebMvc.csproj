@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20190220224934_PESSOACLIENTE.Designer.cs" />
     <Compile Remove="Migrations\20190227200130_Inicio.cs" />
     <Compile Remove="Migrations\20190227200409_Inicio.cs" />
+    <Compile Remove="Migrations\20190301005204_Forma de pagamentos.cs" />
+    <Compile Remove="Migrations\SalesWebMvc\20190301005222_Forma de pagamentos.cs" />
   </ItemGroup>
 
   <ItemGroup>

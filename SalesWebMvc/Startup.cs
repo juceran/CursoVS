@@ -45,6 +45,8 @@ namespace SalesWebMvc
             //injeçao de dependência para personalizar a criação do campos no banco de dados, FluentAPI - Contexts
             services.AddScoped<EmpresaConfiguration>();
             services.AddScoped<DepartamentoConfiguration>();
+            services.AddScoped<FormaPagamentoConfiguration>();
+
             services.AddScoped<PessoaConfiguration>();
             services.AddScoped<PessoaClienteConfiguration>();
             services.AddScoped<PessoaEmailConfiguration>();
@@ -54,6 +56,9 @@ namespace SalesWebMvc
             services.AddScoped<PessoaJuridicaConfiguration>();
             services.AddScoped<PessoaUsuarioConfiguration>();
             services.AddScoped<PessoaUsuarioSenhaConfiguration>();
+            services.AddScoped<PessoaTelefoneConfiguration>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
