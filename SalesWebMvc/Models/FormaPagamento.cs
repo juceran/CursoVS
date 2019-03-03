@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SalesWebMvc.Models.Enums;
 
 namespace SalesWebMvc.Models
 {
@@ -44,6 +45,12 @@ namespace SalesWebMvc.Models
 
         //referencias de relacionamentos
         public Empresa Empresa { get; set; }
+        [Display(Name = "Empresa")]
         public int EmpresaId { get; set; }
+
+        //enums
+        [Display(Name = "Tipo")]
+        public FormaPagamentoTipo FormaPagamentoTipo { get; set; }
+       
     }
 }

@@ -13,14 +13,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <ul class="nav nav-pills" role="tab">
                 <li class="active"> <a href="#pessoa" data-toggle="tab">Pessoa</a></li>
-                <li>                <a href="#cliente" data-toggle="tab">Cliente</a></li>
-                <li>                <a href="#fornecedor" data-toggle="tab">Fornecedor</a></li>
-                <li>                <a href="#fisica" data-toggle="tab">Fisica</a></li>
-                <li>                <a href="#juridica" data-toggle="tab">Juridica</a></li>
-                <li>                <a href="#usuario" data-toggle="tab">Usuário</a></li>
-                <li>                <a href="#email" data-toggle="tab">Email</a></li>
-                <li>                <a href="#endereco" data-toggle="tab">Endereço</a></li>
-                <li>                <a href="#funcionario" data-toggle="tab">Funcionário</a></li>
+                <li>                <a href="#cliente" data-toggle="tab" id="tab_cliente">Cliente</a></li>
+                <li>                <a href="#fornecedor" data-toggle="tab" id="tab_fornecedor">Fornecedor</a></li>
+                <li>                <a href="#fisica" data-toggle="tab" id="tab_fisica">Fisica</a></li>
+                <li>                <a href="#juridica" data-toggle="tab" id="tab_juridica">Juridica</a></li>
+                <li>                <a href="#usuario" data-toggle="tab" id="tab_usuario">Usuário</a></li>
+                @*<li>                <a href="#email" data-toggle="tab" id="tab_email">Email</a></li>
+                    <li>                <a href="#endereco" data-toggle="tab" id="tab_endereco">Endereço</a></li>
+                    <li>                <a href="#funcionario" data-toggle="tab" id="tab_funcionario">Funcionário</a></li>*@
             </ul>
             <div class="tab-content clearfix">
                 <div class="tab-pane active" id="pessoa">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label asp-for="DataCadastro" control-label"></label>
-                        <input asp-for="DataCadastro" class="form-control" />
+                        <input asp-for="DataCadastro" class="form-control" readonly="readonly" />
                     </div>
                     <div class="form-group col-md-1">
                         <div class="checkbox">
@@ -49,6 +49,27 @@
                             </label>
                         </div>
                     </div>
+                    <div class="form-group col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="PessoaFisica.Fisica" /> @Html.DisplayNameFor(model => model.PessoaFisica.Fisica)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="PessoaJuridica.Juridica" /> @Html.DisplayNameFor(model => model.PessoaJuridica.Juridica)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="PessoaUsuario.User" /> @Html.DisplayNameFor(model => model.PessoaUsuario.User)
+                            </label>
+                        </div>
+                    </div>
                     <div class="form-group col-md-12">
                         <div class="checkbox">
                             <label>
@@ -60,13 +81,26 @@
                 <div class="tab-pane" id="cliente">
                     <div class="form-group col-md-4">
                         <label asp-for="PessoaCliente.LimiteCredito" class="control-label"></label>
-                        <input asp-for="PessoaCliente.LimiteCredito" class="form-control"   placeholder="Valor do Limite de Crédito" />
+                        <input asp-for="PessoaCliente.LimiteCredito" class="form-control" style="text-align: right;" asp-format="{0:N}" placeholder="Valor do Limite de Crédito" onkeypress="FormataValor(this.id, 10, event); return SomenteNumero(event);" />
                         <span asp-validation-for="PessoaCliente.LimiteCredito" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaCliente.FormaRecebimentoId" class="control-label"></label>
+                        <select asp-for="PessoaCliente.FormaRecebimentoId" class="form-control" asp-items="ViewBag.FormaRecebimentoId"></select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaCliente.PrazoRecebimentoId" class="control-label"></label>
+                        <select asp-for="PessoaCliente.PrazoRecebimentoId" class="form-control" asp-items="ViewBag.PrazoRecebimentoId"></select>
                     </div>
                 </div>
                 <div class="tab-pane" id="fornecedor">
                     <div class="form-group col-md-4">
-                        <h3>fornecedor</h3>
+                        <label asp-for="PessoaFornecedor.FormaPagamentoId" class="control-label"></label>
+                        <select asp-for="PessoaFornecedor.FormaPagamentoId" class="form-control" asp-items="ViewBag.FormaPagamentoId"></select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="PessoaFornecedor.PrazoPagamentoId" class="control-label"></label>
+                        <select asp-for="PessoaFornecedor.PrazoPagamentoId" class="form-control" asp-items="ViewBag.PrazoPagamentoId"></select>
                     </div>
                 </div>
                 <div class="tab-pane" id="fisica">
@@ -159,19 +193,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="email">
-                    <div class="form-group">
-                        <h3>email</h3>
+                @*<div class="tab-pane" id="email">
+                        <div class="form-group">
+                            <h3>email</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-pane" id="endereco">
-                    <h3>endereço</h3>
-                </div>
-                <div class="tab-pane" id="funcionario">
-                    <div class="form-group col-md-4">
-                        <h3>funcionario</h3>
+                    <div class="tab-pane" id="endereco">
+                        <h3>endereço</h3>
                     </div>
-                </div>
+                    <div class="tab-pane" id="funcionario">
+                        <div class="form-group col-md-4">
+                            <h3>funcionario</h3>
+                        </div>
+                    </div>*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-success" />
@@ -182,7 +216,67 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        //default opção para hide()
+        $('#tab_cliente').hide();
+        $('#tab_fornecedor').hide();
+        $('#tab_fisica').hide();
+        $('#tab_juridica').hide();
+        $('#tab_usuario').hide();
+        /*$('#tab_email').hide();
+        $('#tab_endereco').hide();
+        $('#tab_funcionario').hide();*/
 
+        $('#PessoaCliente_Cliente').change(
+            function () {
+                if (this.checked) {
+                    $('#tab_cliente').show();
+                }
+                else {
+                    $('#tab_cliente').hide();
+                }
+            });
+
+        $('#PessoaFornecedor_Fornecedor').change(
+            function () {
+                if (this.checked) {
+                    $('#tab_fornecedor').show();
+                }
+                else {
+                    $('#tab_fornecedor').hide();
+                }
+            });
+
+        $('#PessoaFisica_Fisica').change(
+            function () {
+                if (this.checked) {
+                    $('#tab_fisica').show();
+                }
+                else {
+                    $('#tab_fisica').hide();
+                }
+            });
+
+        $('#PessoaJuridica_Juridica').change(
+            function () {
+                if (this.checked) {
+                    $('#tab_juridica').show();
+                }
+                else {
+                    $('#tab_juridica').hide();
+                }
+            });
+
+        $('#PessoaUsuario_User').change(
+            function () {
+                if (this.checked) {
+                    $('#tab_usuario').show();
+                }
+                else {
+                    $('#tab_usuario').hide();
+                }
+            });
+    </script>
 }
 
 

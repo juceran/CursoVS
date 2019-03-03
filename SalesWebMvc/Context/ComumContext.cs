@@ -19,6 +19,7 @@ namespace SalesWebMvc.Context
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Departamento> Departamento { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public DbSet<PrazoPagamento> PrazoPagamento { get; set; }
 
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<PessoaCliente> PessoaCliente { get; set; }
@@ -36,6 +37,7 @@ namespace SalesWebMvc.Context
             modelBuilder.ApplyConfiguration(new EmpresaConfiguration());
             modelBuilder.ApplyConfiguration(new DepartamentoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
+            modelBuilder.ApplyConfiguration(new PrazoPagamentoConfiguration());
 
             modelBuilder.ApplyConfiguration(new PessoaConfiguration());
             modelBuilder.ApplyConfiguration(new PessoaClienteConfiguration());

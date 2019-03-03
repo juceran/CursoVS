@@ -69,6 +69,7 @@ namespace SalesWebMvc.Controllers
             if (ModelState.IsValid)
             {
                 //testa se o departamento já existe
+                //var dptoExiste = DepartamentoExiste(departamento);
                 var salesWebMvcContext = _context.Departamento.Where(d => d.EmpresaId == departamento.EmpresaId).OrderBy(d => d.Nome);
                 foreach (var item in salesWebMvcContext)
                 {

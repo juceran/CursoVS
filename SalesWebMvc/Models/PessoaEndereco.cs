@@ -1,5 +1,6 @@
 ﻿using SalesWebMvc.Models.Base;
 using SalesWebMvc.Models.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,10 @@ namespace SalesWebMvc.Models
     {
         //https://www.receitaws.com.br/v1/cnpj/70000401000127
         //https://viacep.com.br/ws/57025350/json/
+        [Required]
+        [DefaultValue(false)]
+        [Display(Name ="Endereço")]
+        public bool Endereco { get; set; }
 
         [Column(TypeName = "varchar(8)")]
         public string CEP { get; set; }

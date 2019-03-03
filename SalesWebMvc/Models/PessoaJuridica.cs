@@ -12,6 +12,11 @@ namespace SalesWebMvc.Models
 {
     public class PessoaJuridica : CamposComuns
     {
+        [Required]
+        [DefaultValue(false)]
+        [Display(Name ="Jurídica")]
+        public bool Juridica { get; set; }
+
         [Column(TypeName = "varchar(16)")]
         public string CNPJ { get; set; }
 

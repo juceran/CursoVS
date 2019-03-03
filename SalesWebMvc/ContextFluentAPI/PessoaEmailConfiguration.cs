@@ -9,6 +9,9 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<PessoaEmail> modelBuilder)
         {
+            modelBuilder
+                .Property(p => p.Emails)
+                .HasDefaultValue(false);
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)

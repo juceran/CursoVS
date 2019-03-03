@@ -1,11 +1,14 @@
 ﻿using SalesWebMvc.Models.Base;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SalesWebMvc.Models
 {
     public class PessoaCliente : CamposComuns
     {
-        public bool? Cliente { get; set; }
+        [Required]
+        [DefaultValue(false)]
+        public bool Cliente { get; set; }
 
         [DataType(dataType: DataType.Currency)]
         [Display(Name = "Limite de Crédito")]
@@ -16,8 +19,12 @@ namespace SalesWebMvc.Models
         public virtual Pessoa Pessoa { get; set; }
         public int PessoaId { get; set; }
 
-        public virtual FormaPagamento FormaPagamento { get; set; }
+        public virtual FormaPagamento FormaRecebimento { get; set; }
         [Display(Name = "Forma de Pagamento")]
-        public int FormaPagamentoId { get; set; }
+        public int FormaRecebimentoId { get; set; }
+
+        public virtual PrazoPagamento PrazoRecebimento { get; set; }
+        [Display(Name = "Prazo de Pagamento")]
+        public int PrazoRecebimentoId { get; set; }
     }
 }

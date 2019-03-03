@@ -2,6 +2,7 @@
 using SalesWebMvc.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,11 @@ namespace SalesWebMvc.Models
 {
     public class PessoaFisica : CamposComuns
     {
+        [Required]
+        [DefaultValue(false)]
+        [Display(Name ="Física")]
+        public bool Fisica { get; set; }
+
         [Column(TypeName = "varchar(128)")]
         public string Nome { get; set; }
 

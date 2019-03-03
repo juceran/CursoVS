@@ -37,8 +37,6 @@ namespace SalesWebMvc.ContextFluentAPI
             modelBuilder
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP");
-
-
         }
     }
 }

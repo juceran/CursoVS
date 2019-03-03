@@ -5,13 +5,10 @@ using System;
 
 namespace SalesWebMvc.ContextFluentAPI
 {
-    public class PessoaJuridicaConfiguration : IEntityTypeConfiguration<PessoaJuridica>
+    public class PrazoPagamentoConfiguration : IEntityTypeConfiguration<PrazoPagamento>
     {
-        public void Configure(EntityTypeBuilder<PessoaJuridica> modelBuilder)
+        public void Configure(EntityTypeBuilder<PrazoPagamento> modelBuilder)
         {
-            modelBuilder
-                .Property(p => p.Juridica)
-                .HasDefaultValue(false);
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)
@@ -30,12 +27,6 @@ namespace SalesWebMvc.ContextFluentAPI
             modelBuilder
                 .Property(p => p.DeletadoData)
                 .HasColumnType("TIMESTAMP");
-
-            //relacionamento 1 para 1
-            modelBuilder
-                .HasOne(p => p.Pessoa)
-                .WithOne(p => p.PessoaJuridica)
-                .HasForeignKey<PessoaJuridica>(p => p.PessoaId);
         }
     }
 }

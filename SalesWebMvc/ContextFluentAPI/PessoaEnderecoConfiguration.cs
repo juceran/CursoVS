@@ -9,6 +9,9 @@ namespace SalesWebMvc.ContextFluentAPI
     {
         public void Configure(EntityTypeBuilder<PessoaEndereco> modelBuilder)
         {
+            modelBuilder
+                .Property(p => p.Endereco)
+                .HasDefaultValue(false);
             //campos comuns
             modelBuilder
                 .Property(p => p.Ativo)

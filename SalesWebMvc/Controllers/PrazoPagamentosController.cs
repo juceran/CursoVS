@@ -10,27 +10,23 @@ using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
 {
-    public class FormaPagamentosController : Controller
+    public class PrazoPagamentosController : Controller
     {
         private readonly SalesWebMvcContext _context;
 
-        public FormaPagamentosController(SalesWebMvcContext context)
+        public PrazoPagamentosController(SalesWebMvcContext context)
         {
             _context = context;
         }
 
-        // GET: FormaPagamentos
+        // GET: PrazoPagamentos
         public async Task<IActionResult> Index()
         {
-            var salesWebMvcContext = _context.FormaPagamento
-                                                .Include(f => f.Empresa)
-                                                .OrderBy(f => f.Descricao)
-                                                .Where(f => f.Deletado == false)
-                                                .Where(f => f.EmpresaId == Program.UserEmpresaId);
+            var salesWebMvcContext = _context.PrazoPagamento.Include(p => p.Empresa).OrderBy(O => O.Descricao);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
-        // GET: FormaPagamentos/Details/5
+        // GET: PrazoPagamentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,47 +34,47 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var formaPagamento = await _context.FormaPagamento
-                .Include(f => f.Empresa)
+            var prazoPagamento = await _context.PrazoPagamento
+                .Include(p => p.Empresa)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (formaPagamento == null)
+            if (prazoPagamento == null)
             {
                 return NotFound();
             }
 
-            return View(formaPagamento);
+            return View(prazoPagamento);
         }
 
-        // GET: FormaPagamentos/Create
+        // GET: PrazoPagamentos/Create
         public IActionResult Create()
         {
-            FormaPagamento formaPagamento = new FormaPagamento
+            PrazoPagamento prazoPagamento = new PrazoPagamento
             {
                 Ativo = true,
                 EmpresaId = Program.UserEmpresaId
             };
             ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia");
-            return View(formaPagamento);
+            return View(prazoPagamento);
         }
 
-        // POST: FormaPagamentos/Create
+        // POST: PrazoPagamentos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
+        public async Task<IActionResult> Create([Bind("Descricao,Parcelas,PrimeiraParcela,DiasParcela,Limite,PrazoMedio,BaixaLancamento,PrazoPagamentoTipo,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] PrazoPagamento prazoPagamento)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(formaPagamento);
+                _context.Add(prazoPagamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", formaPagamento.EmpresaId);
-            return View(formaPagamento);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", prazoPagamento.EmpresaId);
+            return View(prazoPagamento);
         }
 
-        // GET: FormaPagamentos/Edit/5
+        // GET: PrazoPagamentos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,23 +82,23 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var formaPagamento = await _context.FormaPagamento.FindAsync(id);
-            if (formaPagamento == null)
+            var prazoPagamento = await _context.PrazoPagamento.FindAsync(id);
+            if (prazoPagamento == null)
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", formaPagamento.EmpresaId);
-            return View(formaPagamento);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Empresa", prazoPagamento.EmpresaId);
+            return View(prazoPagamento);
         }
 
-        // POST: FormaPagamentos/Edit/5
+        // POST: PrazoPagamentos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Descricao,Parcelas,PrimeiraParcela,DiasParcela,Limite,PrazoMedio,BaixaLancamento,PrazoPagamentoTipo,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] PrazoPagamento prazoPagamento)
         {
-            if (id != formaPagamento.Id)
+            if (id != prazoPagamento.Id)
             {
                 return NotFound();
             }
@@ -111,12 +107,12 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
-                    _context.Update(formaPagamento);
+                    _context.Update(prazoPagamento);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FormaPagamentoExists(formaPagamento.Id))
+                    if (!PrazoPagamentoExists(prazoPagamento.Id))
                     {
                         return NotFound();
                     }
@@ -127,11 +123,11 @@ namespace SalesWebMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", formaPagamento.EmpresaId);
-            return View(formaPagamento);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", prazoPagamento.EmpresaId);
+            return View(prazoPagamento);
         }
 
-        // GET: FormaPagamentos/Delete/5
+        // GET: PrazoPagamentos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,31 +135,31 @@ namespace SalesWebMvc.Controllers
                 return NotFound();
             }
 
-            var formaPagamento = await _context.FormaPagamento
-                .Include(f => f.Empresa)
+            var prazoPagamento = await _context.PrazoPagamento
+                .Include(p => p.Empresa)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (formaPagamento == null)
+            if (prazoPagamento == null)
             {
                 return NotFound();
             }
 
-            return View(formaPagamento);
+            return View(prazoPagamento);
         }
 
-        // POST: FormaPagamentos/Delete/5
+        // POST: PrazoPagamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var formaPagamento = await _context.FormaPagamento.FindAsync(id);
-            _context.FormaPagamento.Remove(formaPagamento);
+            var prazoPagamento = await _context.PrazoPagamento.FindAsync(id);
+            _context.PrazoPagamento.Remove(prazoPagamento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FormaPagamentoExists(int id)
+        private bool PrazoPagamentoExists(int id)
         {
-            return _context.FormaPagamento.Any(e => e.Id == id);
+            return _context.PrazoPagamento.Any(e => e.Id == id);
         }
     }
 }

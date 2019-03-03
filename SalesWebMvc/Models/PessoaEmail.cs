@@ -1,5 +1,6 @@
 ﻿using SalesWebMvc.Models.Base;
 using SalesWebMvc.Models.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +8,11 @@ namespace SalesWebMvc.Models
 {
     public class PessoaEmail : CamposComuns
     {
+        [Required]
+        [DefaultValue(false)]
+        [Display(Name ="Email")]
+        public bool Emails { get; set; }
+
         [Column(TypeName = "varchar(64)")]
         [Required(ErrorMessage = "e-mail é um campo obrigatório!")]
         [EmailAddress(ErrorMessage = "O e-mail informado é inválido!")]

@@ -46,6 +46,7 @@ namespace SalesWebMvc
             services.AddScoped<EmpresaConfiguration>();
             services.AddScoped<DepartamentoConfiguration>();
             services.AddScoped<FormaPagamentoConfiguration>();
+            services.AddScoped<PrazoPagamentoConfiguration>();
 
             services.AddScoped<PessoaConfiguration>();
             services.AddScoped<PessoaClienteConfiguration>();

@@ -1,0 +1,60 @@
+﻿using SalesWebMvc.Models.Base;
+using SalesWebMvc.Models.Enums;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SalesWebMvc.Models
+{
+    public class PrazoPagamento : CamposComuns
+    {
+        [Column(TypeName = "varchar(64)")]
+        [MinLength(3, ErrorMessage = "Nome deve ter pelo menos 3 caracteres")]
+        [Required(ErrorMessage = "Descrição é um campo obrigatório")]
+        [DisplayName("Descrição")]
+        public string Descricao { get; set; }
+
+        [Required(ErrorMessage = "Prazo de pagamento dever ter no mínimo uma parcela")]
+        [DefaultValue(1)]
+        [Display(Name = "Parcelas")]
+        public int Parcelas { get; set; }
+
+        [Required(ErrorMessage = "Dias da primeira parcela")]
+        [DefaultValue(0)]
+        [Display(Name = "Primeira Parcela")]
+        public int PrimeiraParcela { get; set; }
+
+
+        [Required(ErrorMessage = "Dias entre parcelas")]
+        [DefaultValue(0)]
+        [Display(Name = "Dias Parcelas")]
+        public int DiasParcela { get; set; }
+
+        [Required(ErrorMessage = "Limite mínimo para esse prazo")]
+        [Display(Name = "Limite")]
+        [DataType(dataType: DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DefaultValue(0)]
+        public decimal Limite { get; set; }
+
+        [Required]
+        [DefaultValue(1)]
+        [DisplayFormat(DataFormatString = "{0:N}")]
+        [Display(Name = "Prazo Médio")]
+        public decimal PrazoMedio { get; set; }
+
+        [Required]
+        [Display(Name = "Baixa Lançamento")]
+        [DefaultValue(false)]
+        public bool BaixaLancamento { get; set; }
+
+        //enums
+        [Display(Name = "Tipo")]
+        public PrazoPagamentoTipo PrazoPagamentoTipo { get; set; }
+
+        //referencias de relacionamentos
+        public Empresa Empresa { get; set; }
+        [Display(Name = "Empresa")]
+        public int EmpresaId { get; set; }
+    }
+}

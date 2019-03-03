@@ -11,6 +11,11 @@ namespace SalesWebMvc.Models
 {
     public class PessoaUsuario : CamposComuns
     {
+        [Required]
+        [DefaultValue(false)]
+        [Display(Name = "Usuário")]
+        public bool User { get; set; }
+
         [Column(TypeName = "varchar(64)")]
         [Display(Name = "Usuário")]
         public String Usuario { get; set; }
