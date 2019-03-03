@@ -15,14 +15,5 @@ namespace SalesWebMvc.Models
         public Empresa Empresa { get; set; }
         [Display(Name = "Empresa")]
         public int EmpresaId { get; set; }
-
-        public Departamento()
-        {
-        }
-
-        public bool DepartamentoExiste()
-        {
-            return true;
-        }
     }
 }

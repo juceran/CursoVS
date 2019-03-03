@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Context;
+using SalesWebMvc.Services;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
@@ -15,10 +16,12 @@ namespace SalesWebMvc.Controllers
     public class DepartamentosController : Controller
     {
         private readonly SalesWebMvcContext _context;
+        private readonly DepartamentoService _departamentoService;
 
-        public DepartamentosController(SalesWebMvcContext context)
+        public DepartamentosController(SalesWebMvcContext context, DepartamentoService departamentoService)
         {
             _context = context;
+            _departamentoService = departamentoService;
         }
 
         // GET: Departamentos
@@ -68,26 +71,24 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //testa se o departamento já existe
-                //var dptoExiste = DepartamentoExiste(departamento);
-                var salesWebMvcContext = _context.Departamento.Where(d => d.EmpresaId == departamento.EmpresaId).OrderBy(d => d.Nome);
-                foreach (var item in salesWebMvcContext)
+                //padrão dos campos
+                departamento.Nome = departamento.Nome.ToUpper();
+
+                //Verifica duplicidade no nome do departamento
+                var dptoExiste = _departamentoService.DepartamentoExiste(departamento);
+
+                if (dptoExiste)
                 {
-                    if(item.Nome == departamento.Nome)
-                    {
-                        ViewData["Message"] = "Nome do Departamento já existe!";
-                        ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");
-                        return View(departamento);
-                    }
+                    ViewData["Message"] = "Nome do Departamento em duplicidade!";
+                    ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");
+                    return View(departamento);
                 }
 
-                departamento.DataCadastro = DateTime.Now;
-                departamento.Ativo = true;
                 _context.Add(departamento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", departamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", departamento.EmpresaId);
             return View(departamento);
         }
 

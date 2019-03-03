@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebMvc.Context;
 using SalesWebMvc.ContextFluentAPI;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc
 {
@@ -59,7 +60,8 @@ namespace SalesWebMvc
             services.AddScoped<PessoaUsuarioSenhaConfiguration>();
             services.AddScoped<PessoaTelefoneConfiguration>();
 
-
+            //serviços dos repositorios
+            services.AddScoped<DepartamentoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
