@@ -163,7 +163,28 @@ namespace SalesWebMvc.Controllers
             {
                 return NotFound();
             }
-
+            FormaPagamento formaPagamento = new FormaPagamento();
+            ViewData["FormaRecebimentoId"] = new SelectList(_context.FormaPagamento
+                                                            .OrderBy(x => x.Descricao)
+                                                            .Where(f => f.Deletado == false)
+                                                            .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Receber)
+                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+            PrazoPagamento prazoPagamento = new PrazoPagamento();
+            ViewData["PrazoRecebimentoId"] = new SelectList(_context.PrazoPagamento
+                                                            .OrderBy(p => p.Descricao)
+                                                            .Where(p => p.Deletado == false)
+                                                            .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Receber)
+                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+            ViewData["FormaPagamentoId"] = new SelectList(_context.FormaPagamento
+                                                            .OrderBy(x => x.Descricao)
+                                                            .Where(f => f.Deletado == false)
+                                                            .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Pagar)
+                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+            ViewData["PrazoPagamentoId"] = new SelectList(_context.PrazoPagamento
+                                                            .OrderBy(p => p.Descricao)
+                                                            .Where(p => p.Deletado == false)
+                                                            .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Pagar)
+                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
             return View(pessoa);
         }
 
@@ -188,7 +209,7 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
-                    pessoa.UltimaAtualizacao = DateTime.Now;
+                    //pessoa.UltimaAtualizacao = DateTime.Now;
                     //pessoa.PessoaCliente.UltimaAtualizacao = DateTime.Now;
                     _context.Update(pessoa);
                     await _context.SaveChangesAsync();
