@@ -11,7 +11,7 @@ namespace SalesWebMvc.Models
     public class MenuUl : CamposComuns
     {
         [Column(TypeName = "varchar(128)")]
-        [Display(Name = "UL")]
+        [Display(Name = "Menu")]
         public string Menu { get; set; }
 
         [Column(TypeName = "varchar(256)")]

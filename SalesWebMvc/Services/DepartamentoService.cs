@@ -13,8 +13,6 @@ namespace SalesWebMvc.Services
             _context = context;
         }
 
-        private readonly Departamento departmento = new Departamento();
-
         public bool DepartamentoExiste(Departamento departamento)
         {
             var dptos = _context.Departamento.Where(d => d.EmpresaId == departamento.EmpresaId).OrderBy(d => d.Nome);

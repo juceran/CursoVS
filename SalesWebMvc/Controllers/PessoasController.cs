@@ -209,8 +209,6 @@ namespace SalesWebMvc.Controllers
             {
                 try
                 {
-                    //pessoa.UltimaAtualizacao = DateTime.Now;
-                    //pessoa.PessoaCliente.UltimaAtualizacao = DateTime.Now;
                     _context.Update(pessoa);
                     await _context.SaveChangesAsync();
                 }
@@ -259,7 +257,12 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             Pessoa pessoa = await _context.Pessoa.FindAsync(id);
-            _context.Pessoa.Remove(pessoa);
+
+            pessoa.Ativo = false;
+            pessoa.Deletado = true;
+            pessoa.DeletadoData = DateTime.Now;
+            _context.Pessoa.Update(pessoa);
+            //_context.Pessoa.Remove(pessoa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

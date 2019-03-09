@@ -152,7 +152,11 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var prazoPagamento = await _context.PrazoPagamento.FindAsync(id);
-            _context.PrazoPagamento.Remove(prazoPagamento);
+            prazoPagamento.Ativo = false;
+            prazoPagamento.Deletado = true;
+            prazoPagamento.DeletadoData = DateTime.Now;
+            _context.PrazoPagamento.Update(prazoPagamento);
+            //_context.PrazoPagamento.Remove(prazoPagamento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

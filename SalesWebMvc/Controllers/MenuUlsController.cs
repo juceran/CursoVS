@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Context;
+using SalesWebMvc.Services;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Controllers
@@ -13,16 +14,20 @@ namespace SalesWebMvc.Controllers
     public class MenuUlsController : Controller
     {
         private readonly SalesWebMvcContext _context;
+        private readonly MenuService _menuService;
 
-        public MenuUlsController(SalesWebMvcContext context)
+        public MenuUlsController(SalesWebMvcContext context, MenuService menuService)
         {
             _context = context;
+            _menuService = menuService;
         }
+
+
 
         // GET: MenuUls
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MenuUl.ToListAsync());
+            return View(await _context.MenuUl.OrderBy(x => x.Menu).ToListAsync());
         }
 
         // GET: MenuUls/Details/5
@@ -58,6 +63,14 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Verifica duplicidade
+                var menuExiste = _menuService.MenuExiste(menuUl);
+                if (menuExiste)
+                {
+                    ViewData["Message"] = "Menu em duplicidade!";                   
+                    return View(menuUl);
+                }
+
                 _context.Add(menuUl);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -140,7 +153,11 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var menuUl = await _context.MenuUl.FindAsync(id);
-            _context.MenuUl.Remove(menuUl);
+            menuUl.Ativo = false;
+            menuUl.Deletado = true;
+            menuUl.DeletadoData = DateTime.Now;
+            _context.MenuUl.Update(menuUl);
+            //_context.MenuUl.Remove(menuUl);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

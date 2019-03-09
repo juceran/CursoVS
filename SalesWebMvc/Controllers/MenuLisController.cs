@@ -23,7 +23,7 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> Index()
         {
             var salesWebMvcContext = _context.MenuLi.Include(m => m.MenuUl);
-            return View(await salesWebMvcContext.ToListAsync());
+            return View(await salesWebMvcContext.OrderBy(x => x.SubMenu).ToListAsync());
         }
 
         // GET: MenuLis/Details/5
@@ -48,7 +48,7 @@ namespace SalesWebMvc.Controllers
         // GET: MenuLis/Create
         public IActionResult Create()
         {
-            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id");
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace SalesWebMvc.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu", menuLi.MenuUlId);
             return View(menuLi);
         }
 
@@ -82,7 +82,7 @@ namespace SalesWebMvc.Controllers
             {
                 return NotFound();
             }
-            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu", menuLi.MenuUlId);
             return View(menuLi);
         }
 
@@ -118,7 +118,7 @@ namespace SalesWebMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu", menuLi.MenuUlId);
             return View(menuLi);
         }
 
@@ -147,7 +147,11 @@ namespace SalesWebMvc.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var menuLi = await _context.MenuLi.FindAsync(id);
-            _context.MenuLi.Remove(menuLi);
+            menuLi.Ativo = false;
+            menuLi.Deletado = true;
+            menuLi.DeletadoData = DateTime.Now;
+            _context.MenuLi.Update(menuLi);
+            //_context.MenuLi.Remove(menuLi);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

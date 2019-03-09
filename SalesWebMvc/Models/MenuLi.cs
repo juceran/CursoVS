@@ -11,7 +11,7 @@ namespace SalesWebMvc.Models
     public class MenuLi : CamposComuns
     {
         [Column(TypeName = "varchar(128)")]
-        [Display(Name = "LI")]
+        [Display(Name = "SubMenu")]
         public string SubMenu { get; set; }
 
         [Column(TypeName = "varchar(256)")]
@@ -22,7 +22,8 @@ namespace SalesWebMvc.Models
         [Display(Name = "Título")]
         public string Titulo { get; set; }
 
-        //Relacionamentos     
+        //Relacionamentos   
+        [Display(Name = "Menu")]
         public int MenuUlId { get; set; }
         public MenuUl MenuUl { get; set; }
     }

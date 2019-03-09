@@ -62,6 +62,7 @@ namespace SalesWebMvc
             
             //serviços dos repositorios
             services.AddScoped<DepartamentoService>();
+            services.AddScoped<MenuService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
