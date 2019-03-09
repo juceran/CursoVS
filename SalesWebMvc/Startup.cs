@@ -59,7 +59,7 @@ namespace SalesWebMvc
             services.AddScoped<PessoaUsuarioConfiguration>();
             services.AddScoped<PessoaUsuarioSenhaConfiguration>();
             services.AddScoped<PessoaTelefoneConfiguration>();
-
+            
             //serviços dos repositorios
             services.AddScoped<DepartamentoService>();
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SalesWebMvc.Context;
@@ -9,9 +10,10 @@ using SalesWebMvc.Context;
 namespace SalesWebMvc.Migrations
 {
     [DbContext(typeof(ComumContext))]
-    partial class ComumContextModelSnapshot : ModelSnapshot
+    [Migration("20190309124347_inicio")]
+    partial class inicio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

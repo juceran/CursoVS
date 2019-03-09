@@ -32,14 +32,6 @@ namespace SalesWebMvc.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new EmpresaConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartamentoConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaClienteConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaFisicaConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaFornecedorConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaJuridicaConfiguration());
-            modelBuilder.ApplyConfiguration(new PessoaUsuarioConfiguration());
 
         }
     }

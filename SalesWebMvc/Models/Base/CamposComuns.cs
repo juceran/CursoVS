@@ -18,6 +18,7 @@ namespace SalesWebMvc.Models.Base
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
         public DateTime? DataCadastro { get; set; }
 
+        [DefaultValue("DateTime.Now")]
         [Display(Name = "Última Atualização")]
         [DataType(DataType.DateTime)]
         public DateTime? UltimaAtualizacao { get; set; }

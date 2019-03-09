@@ -28,8 +28,15 @@ namespace SalesWebMvc.Context
         public DbSet<PessoaUsuario> PessoaUsuario { get; set; }
         public DbSet<PessoaUsuarioSenha> PessoaUsuarioSenha { get; set; }
 
+        public DbSet<UsuarioPermissaoAcesso> UsuarioPermissaoAcesso { get; set; }
+
+        //menus para acesso ao site
+        public DbSet<MenuUl> MenuUl { get; set; }
+        public DbSet<MenuLi> MenuLi { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.ApplyConfiguration(new EmpresaConfiguration());
             modelBuilder.ApplyConfiguration(new DepartamentoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
@@ -45,6 +52,10 @@ namespace SalesWebMvc.Context
             modelBuilder.ApplyConfiguration(new PessoaUsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new PessoaUsuarioSenhaConfiguration());
 
+            modelBuilder.ApplyConfiguration(new UsuarioPermissaoAcessoConfiguration());
+
+            modelBuilder.ApplyConfiguration(new MenuUlConfiguration());
+            modelBuilder.ApplyConfiguration(new MenuLiConfiguration());
         }
     }
 }

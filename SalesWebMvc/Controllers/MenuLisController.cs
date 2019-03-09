@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Context;
+using SalesWebMvc.Models;
+
+namespace SalesWebMvc.Controllers
+{
+    public class MenuLisController : Controller
+    {
+        private readonly SalesWebMvcContext _context;
+
+        public MenuLisController(SalesWebMvcContext context)
+        {
+            _context = context;
+        }
+
+        // GET: MenuLis
+        public async Task<IActionResult> Index()
+        {
+            var salesWebMvcContext = _context.MenuLi.Include(m => m.MenuUl);
+            return View(await salesWebMvcContext.ToListAsync());
+        }
+
+        // GET: MenuLis/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var menuLi = await _context.MenuLi
+                .Include(m => m.MenuUl)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (menuLi == null)
+            {
+                return NotFound();
+            }
+
+            return View(menuLi);
+        }
+
+        // GET: MenuLis/Create
+        public IActionResult Create()
+        {
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id");
+            return View();
+        }
+
+        // POST: MenuLis/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("SubMenu,Url,Titulo,MenuUlId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] MenuLi menuLi)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(menuLi);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            return View(menuLi);
+        }
+
+        // GET: MenuLis/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var menuLi = await _context.MenuLi.FindAsync(id);
+            if (menuLi == null)
+            {
+                return NotFound();
+            }
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            return View(menuLi);
+        }
+
+        // POST: MenuLis/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("SubMenu,Url,Titulo,MenuUlId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData")] MenuLi menuLi)
+        {
+            if (id != menuLi.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(menuLi);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!MenuLiExists(menuLi.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl, "Id", "Id", menuLi.MenuUlId);
+            return View(menuLi);
+        }
+
+        // GET: MenuLis/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var menuLi = await _context.MenuLi
+                .Include(m => m.MenuUl)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (menuLi == null)
+            {
+                return NotFound();
+            }
+
+            return View(menuLi);
+        }
+
+        // POST: MenuLis/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var menuLi = await _context.MenuLi.FindAsync(id);
+            _context.MenuLi.Remove(menuLi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool MenuLiExists(int id)
+        {
+            return _context.MenuLi.Any(e => e.Id == id);
+        }
+    }
+}
