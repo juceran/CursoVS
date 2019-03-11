@@ -7,23 +7,44 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
     public class MenuLisController : Controller
     {
         private readonly SalesWebMvcContext _context;
+        private readonly SubMenuService _submenuService;
 
-        public MenuLisController(SalesWebMvcContext context)
+        public MenuLisController(SalesWebMvcContext context, SubMenuService submenuService)
         {
             _context = context;
+            _submenuService = submenuService;
         }
 
         // GET: MenuLis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int filtroMenu, string filtro)
         {
-            var salesWebMvcContext = _context.MenuLi.Include(m => m.MenuUl);
-            return View(await salesWebMvcContext.OrderBy(x => x.SubMenu).ToListAsync());
+            ViewData["filtro"] = filtro;
+            ViewData["filtroMenu"] = filtroMenu;
+            var salesWebMvcContext = _context.MenuLi.Include(m => m.MenuUl).OrderBy(sm => sm.SubMenu);
+            ViewData["MenuUlId"] = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu");
+            ViewBag.filtroMenu = new SelectList(_context.MenuUl.OrderBy(x => x.Menu), "Id", "Menu");
+
+            if (!String.IsNullOrEmpty(filtro) || filtroMenu != 0 )
+            {
+                if(filtro == null) { filtro = ""; }
+                //filtra por submenu
+                return View(await _context.MenuLi
+                                    .OrderBy(x => x.SubMenu)
+                                    .Where(x => x.MenuUlId == filtroMenu)
+                                    .Where(x => x.SubMenu.Contains(filtro))
+                                    .ToListAsync());
+            }
+            else
+            {
+                return View(await salesWebMvcContext.OrderBy(x => x.SubMenu).ToListAsync());
+            } 
         }
 
         // GET: MenuLis/Details/5

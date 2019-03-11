@@ -66,7 +66,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
+        public async Task<IActionResult> Create([Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoDeCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace SalesWebMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Descricao,GeraFinanceiro,BaixaLancamento,CartaoCredito,CartaoDeCredito,CartaoCreditoVencimento,CartaoCreditoMelhorDia,EmpresaId,Id,Ativo,DataCadastro,UltimaAtualizacao,Deletado,DeletadoData,FormaPagamentoTipo")] FormaPagamento formaPagamento)
         {
             if (id != formaPagamento.Id)
             {

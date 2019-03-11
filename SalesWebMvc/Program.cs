@@ -14,7 +14,7 @@ namespace SalesWebMvc
     {
         public static string BancoDeDadosAplicacao { get; set; }
         public static string BancoDeDadosNovo { get; set; }
-        //enquento não faço autorizacao vou pegar o id da empresa temporariamente
+        //enquanto não faço autorizacao vou pegar o id da empresa temporariamente
         public static int UserEmpresaId { get; set; }
 
         public static void Main(string[] args)

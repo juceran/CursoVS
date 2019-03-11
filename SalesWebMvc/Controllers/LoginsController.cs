@@ -2,6 +2,7 @@
 using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -11,11 +12,13 @@ namespace SalesWebMvc.Controllers
     {
         private readonly ComumContext _context;
         private readonly SalesWebMvcContext _contextAplicacao;
-        
-        public LoginsController(ComumContext context, SalesWebMvcContext contextAplicacao)
+        private readonly LoginService _loginService;
+
+        public LoginsController(ComumContext context, SalesWebMvcContext contextAplicacao, LoginService loginService)
         {
             _context = context;
             _contextAplicacao = contextAplicacao;
+            _loginService = loginService;
         }
 
         [Required]
@@ -36,45 +39,16 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Remover caracteres do CPForCNPJ
-                CNPJ = RemoverCaracteres.StringSemFormatacao(login.CNPJ);
-
-                //testar se a empresa existe e qual o banco de dados
-                IQueryable<Empresa> empresaComum = _context.Empresa
-                    .Where(e => e.CNPJ == CNPJ)
-                    .Where(e => e.Ativo == true);
-                string database = "";
-                foreach (Empresa p in empresaComum)
+                //var dptoExiste = _departamentoService.DepartamentoExiste(departamento);
+                if (_loginService.ValidarAcesso(login))
                 {
-                    database = p.Database;
-                }
-                if (database != "")
-                {
-                    Program.BancoDeDadosAplicacao = database;
-                    if (Program.BancoDeDadosAplicacao != null)
-                    {
-
-                    }
-                    //verifica o acesso do usuario na base da aplicacao
-                    IQueryable<Empresa> empresaAplicacao = _contextAplicacao.Empresa
-                        .Where(e => e.CNPJ == CNPJ)
-                        .Where(e => e.Database == database)
-                        .Where(x => x.Ativo == true);
-                    foreach (Empresa item in empresaAplicacao)
-                    {
-                        Program.UserEmpresaId = item.Id;
-                    }
-
-                    bool loginOk = login.ValidarLogin();
+                    return RedirectToAction("Index", "Pessoas");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Departamentos");
-                }
-
-
-
-                return RedirectToAction("Index", "Pessoas");
+                    TempData["acesso"] = "Acesso não permitido!";
+                    return RedirectToAction("Login");
+                }              
             }
             else
             {

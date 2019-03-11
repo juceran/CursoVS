@@ -59,7 +59,7 @@ namespace SalesWebMvc.Models
         public string Cidade { get; set; }
 
         [Required(ErrorMessage = "A sigla do estado é um campo obrigatório!")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "A sigla do estado deve ter 2 caracteres!")]
+        //[StringLength(2, MinimumLength = 2, ErrorMessage = "A sigla do estado deve ter 2 caracteres!")]
         public string Uf { get; set; }
 
         [Column(TypeName = "varchar(16)")]

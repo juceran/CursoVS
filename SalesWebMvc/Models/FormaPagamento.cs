@@ -51,6 +51,9 @@ namespace SalesWebMvc.Models
         //enums
         [Display(Name = "Tipo")]
         public FormaPagamentoTipo FormaPagamentoTipo { get; set; }
-       
+
+        [Display(Name = "Bandeira")]
+        public CartaoDeCredito CartaoDeCredito { get; set; }
+
     }
 }

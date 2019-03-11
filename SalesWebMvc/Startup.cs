@@ -18,7 +18,7 @@ namespace SalesWebMvc
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,13 +36,18 @@ namespace SalesWebMvc
             //conexão com banco de dados " + Program.BancoDeDadosAplicacao + "
             services.AddDbContext<ComumContext>(options => options.UseNpgsql("Host=localhost;Database=Comum;Username=WODINPASS;Password=(*5523bASS%$12_."));
             services.AddDbContext<NovoContext>(options => options.UseNpgsql("Host=localhost;Database=Novo;Username=WODINPASS;Password=(*5523bASS%$12_."));
-            services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=SalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
+
             if (Program.BancoDeDadosAplicacao != null)
             {
                 services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=" + Program.BancoDeDadosAplicacao + ";Username=WODINPASS;Password=(*5523bASS%$12_."));
             }
-            
-            
+            else
+            {
+                //services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=;Username=;Password=;"));
+                services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=SalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
+            }
+
+
             //injeçao de dependência para personalizar a criação do campos no banco de dados, FluentAPI - Contexts
             services.AddScoped<EmpresaConfiguration>();
             services.AddScoped<DepartamentoConfiguration>();
@@ -59,10 +64,12 @@ namespace SalesWebMvc
             services.AddScoped<PessoaUsuarioConfiguration>();
             services.AddScoped<PessoaUsuarioSenhaConfiguration>();
             services.AddScoped<PessoaTelefoneConfiguration>();
-            
+
             //serviços dos repositorios
             services.AddScoped<DepartamentoService>();
             services.AddScoped<MenuService>();
+            services.AddScoped<SubMenuService>();
+            services.AddScoped<LoginService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,7 +93,7 @@ namespace SalesWebMvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Logins}/{action=Login}/{id?}");
             });
         }
     }
