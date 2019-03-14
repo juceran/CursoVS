@@ -79,12 +79,16 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script type="text/javascript">
-        //default opção para hide()
-        if (document.getElementById("CartaoCredito").value != true) {
+    <script type="text/javascript">  
+        if (document.getElementById("CartaoCredito").value == false) {
             $('#CartaoCreditoVencimento').hide();
             $('#CartaoCreditoMelhorDia').hide();
             $('#CartaoCreditoBandeira').hide();
+        }
+        else {
+            $('#CartaoCreditoVencimento').show();
+            $('#CartaoCreditoMelhorDia').show();
+            $('#CartaoCreditoBandeira').show();
         }
 
         $('#CartaoCredito').change(

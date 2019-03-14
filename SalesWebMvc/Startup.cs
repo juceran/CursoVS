@@ -30,8 +30,10 @@ namespace SalesWebMvc
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddHttpContextAccessor();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSession();
+           
 
             //conexão com banco de dados " + Program.BancoDeDadosAplicacao + "
             services.AddDbContext<ComumContext>(options => options.UseNpgsql("Host=localhost;Database=Comum;Username=WODINPASS;Password=(*5523bASS%$12_."));
@@ -70,6 +72,7 @@ namespace SalesWebMvc
             services.AddScoped<MenuService>();
             services.AddScoped<SubMenuService>();
             services.AddScoped<LoginService>();
+            services.AddScoped<PessoaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +91,7 @@ namespace SalesWebMvc
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

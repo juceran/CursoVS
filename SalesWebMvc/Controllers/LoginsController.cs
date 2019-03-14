@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
@@ -39,15 +40,17 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var dptoExiste = _departamentoService.DepartamentoExiste(departamento);
                 if (_loginService.ValidarAcesso(login))
                 {
+                    HttpContext.Session.SetInt32("LogonEmpresaId", Program.EmpresaId);
+                    HttpContext.Session.SetString("LogonUsuario", login.Usuario);
+
                     return RedirectToAction("Index", "Pessoas");
                 }
                 else
                 {
-                    TempData["acesso"] = "Acesso não permitido!";
-                    return RedirectToAction("Login");
+                    ViewData["acesso"] = "Acesso não permitido!";
+                    return View("Login");
                 }              
             }
             else

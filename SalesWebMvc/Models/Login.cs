@@ -13,10 +13,5 @@ namespace SalesWebMvc.Models
         [Required(ErrorMessage = "Digite a senha de acesso ao sistema")]
 
         public string Senha { get; set; }
-
-        internal bool ValidarLogin()
-        {
-            return true;
-        }
     }
 }

@@ -31,7 +31,7 @@ namespace SalesWebMvc.Controllers
                                         .Include(e => e.Empresa)
                                         .OrderBy(d => d.Nome)
                                         .Where(d => d.Deletado == false)
-                                        .Where(d => d.EmpresaId == Program.UserEmpresaId);
+                                        .Where(d => d.EmpresaId == Program.EmpresaId);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -75,9 +75,7 @@ namespace SalesWebMvc.Controllers
                 departamento.Nome = departamento.Nome.ToUpper();
 
                 //Verifica duplicidade no nome do departamento
-                var dptoExiste = _departamentoService.DepartamentoExiste(departamento);
-
-                if (dptoExiste)
+                if (_departamentoService.DepartamentoExiste(departamento))
                 {
                     ViewData["Message"] = "Nome do Departamento em duplicidade!";
                     ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(x => x.Fantasia), "Id", "Fantasia");

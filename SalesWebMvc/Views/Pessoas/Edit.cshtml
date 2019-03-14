@@ -246,15 +246,11 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
-        //default opção para hide()
-        /*$('#tab_cliente').hide();
-        $('#tab_fornecedor').hide();
-        $('#tab_fisica').hide();
-        $('#tab_juridica').hide();
-        $('#tab_usuario').hide();
-        $('#tab_email').hide();
-        $('#tab_endereco').hide();
-        $('#tab_funcionario').hide();*/
+        if (document.getElementById("PessoaCliente_Cliente").value == true) { $('#tab_cliente').show(); } else { $('#tab_cliente').hide(); }
+        if (document.getElementById("PessoaFornecedor_Fornecedor").value == true) { $('#tab_fornecedor').show(); } else { $('#tab_fornecedor').hide(); }
+        if (document.getElementById("PessoaFisica_Fisica").value == true) { $('#tab_fisica').show(); } else { $('#tab_fisica').hide(); }
+        if (document.getElementById("PessoaJuridica_Juridica").value == true) { $('#tab_juridica').show(); } else { $('#tab_juridica').hide(); }
+        if (document.getElementById("PessoaUsuario_User").value == true) { $('#tab_usuario').show(); } else { $('#tab_usuario').hide(); }
 
         $('#PessoaCliente_Cliente').change(
             function () {
@@ -265,7 +261,6 @@
                     $('#tab_cliente').hide();
                 }
             });
-
         $('#PessoaFornecedor_Fornecedor').change(
             function () {
                 if (this.checked) {
@@ -275,7 +270,6 @@
                     $('#tab_fornecedor').hide();
                 }
             });
-
         $('#PessoaFisica_Fisica').change(
             function () {
                 if (this.checked) {
@@ -285,7 +279,6 @@
                     $('#tab_fisica').hide();
                 }
             });
-
         $('#PessoaJuridica_Juridica').change(
             function () {
                 if (this.checked) {
@@ -295,7 +288,6 @@
                     $('#tab_juridica').hide();
                 }
             });
-
         $('#PessoaUsuario_User').change(
             function () {
                 if (this.checked) {

@@ -26,7 +26,7 @@ namespace SalesWebMvc.Controllers
                                                 .Include(f => f.Empresa)
                                                 .OrderBy(f => f.Descricao)
                                                 .Where(f => f.Deletado == false)
-                                                .Where(f => f.EmpresaId == Program.UserEmpresaId);
+                                                .Where(f => f.EmpresaId == Program.EmpresaId);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -55,7 +55,7 @@ namespace SalesWebMvc.Controllers
             FormaPagamento formaPagamento = new FormaPagamento
             {
                 Ativo = true,
-                EmpresaId = Program.UserEmpresaId
+                EmpresaId = Program.EmpresaId
             };
             ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia");
             return View(formaPagamento);

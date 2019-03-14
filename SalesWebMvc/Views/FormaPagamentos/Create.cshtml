@@ -78,10 +78,16 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
-        //default opção para hide()
-        $('#CartaoCreditoVencimento').hide();
-        $('#CartaoCreditoMelhorDia').hide();
-        $('#CartaoCreditoBandeira').hide();
+        if (document.getElementById("CartaoCredito").value == false) {
+            $('#CartaoCreditoVencimento').hide();
+            $('#CartaoCreditoMelhorDia').hide();
+            $('#CartaoCreditoBandeira').hide();
+        }
+        else {
+            $('#CartaoCreditoVencimento').show();
+            $('#CartaoCreditoMelhorDia').show();
+            $('#CartaoCreditoBandeira').show();
+        }
 
         $('#CartaoCredito').change(
             function () {

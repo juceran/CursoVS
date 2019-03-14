@@ -51,7 +51,7 @@ namespace SalesWebMvc.Controllers
             PrazoPagamento prazoPagamento = new PrazoPagamento
             {
                 Ativo = true,
-                EmpresaId = Program.UserEmpresaId
+                EmpresaId = Program.EmpresaId
             };
             ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia");
             return View(prazoPagamento);

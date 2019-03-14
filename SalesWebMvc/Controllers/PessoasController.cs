@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,10 +14,12 @@ namespace SalesWebMvc.Controllers
     public class PessoasController : Controller
     {
         private readonly SalesWebMvcContext _context;
+        private readonly PessoaService _pessoaService;
 
-        public PessoasController(SalesWebMvcContext context)
+        public PessoasController(SalesWebMvcContext context, PessoaService pessoaService)
         {
             _context = context;
+            _pessoaService = pessoaService;
         }
 
         // GET: Pessoas
@@ -30,7 +33,7 @@ namespace SalesWebMvc.Controllers
                                         .Include(p => p.PessoaUsuario)
                                         .OrderBy(p => p.Descricao)
                                         .Where(p => p.Deletado == false)
-                                        .Where(p => p.EmpresaId == Program.UserEmpresaId);
+                                        .Where(p => p.EmpresaId == Program.EmpresaId);
             return View(await salesWebMvcContext.ToListAsync());
         }
 
@@ -64,14 +67,14 @@ namespace SalesWebMvc.Controllers
         public IActionResult Create()
         {
             //somente enquanto não implementa a AUTENTICAÇÃO
-            if (Program.UserEmpresaId < 1)
+            if (Program.EmpresaId < 1)
             {
-                Program.UserEmpresaId = 1;
+                Program.EmpresaId = 1;
             }
 
             Pessoa pessoa = new Pessoa
             {
-                EmpresaId = Program.UserEmpresaId,
+                EmpresaId = Program.EmpresaId,
                 DataCadastro = DateTime.Now,
                 UltimaAtualizacao = DateTime.Now,
                 Ativo = true,
@@ -89,23 +92,23 @@ namespace SalesWebMvc.Controllers
                                                             .OrderBy(x => x.Descricao)
                                                             .Where(f => f.Deletado == false)
                                                             .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Receber)
-                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(f => f.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             PrazoPagamento prazoPagamento = new PrazoPagamento();
             ViewData["PrazoRecebimentoId"] = new SelectList(_context.PrazoPagamento
                                                             .OrderBy(p => p.Descricao)
                                                             .Where(p => p.Deletado == false)
                                                             .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Receber)
-                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(p => p.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             ViewData["FormaPagamentoId"] = new SelectList(_context.FormaPagamento
                                                             .OrderBy(x => x.Descricao)
                                                             .Where(f => f.Deletado == false)
                                                             .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Pagar)
-                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(f => f.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             ViewData["PrazoPagamentoId"] = new SelectList(_context.PrazoPagamento
                                                             .OrderBy(p => p.Descricao)
                                                             .Where(p => p.Deletado == false)
                                                             .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Pagar)
-                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(p => p.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             return View(pessoa);
         }
 
@@ -119,23 +122,16 @@ namespace SalesWebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODOS ESSES COMANDOS VÃO PARA A MODEL
-                if (pessoa.PessoaCliente.Cliente == true)
+                if (_pessoaService.ValidarPessoaUsuario(pessoa))
                 {
-                    pessoa.PessoaCliente.Ativo = true;
+                    ViewData["Message"] = "Nome de usuário em duplicidade!";
+                    return View(pessoa);
                 }
-                if (pessoa.PessoaFornecedor.Fornecedor == true)
-                {
-                    pessoa.PessoaFornecedor.Ativo = true;
-                }
-                if (pessoa.PessoaFisica != null)
-                {
-                    pessoa.PessoaFisica.CPF = RemoverCaracteres.StringSemFormatacao(pessoa.PessoaFisica.CPF);
-                }
-                if (pessoa.PessoaJuridica != null)
-                {
-                    pessoa.PessoaJuridica.CNPJ = RemoverCaracteres.StringSemFormatacao(pessoa.PessoaJuridica.CNPJ);
-                }
+
+                //remove caracteres
+                pessoa.PessoaFisica.CPF = RemoverCaracteres.StringSemFormatacao(pessoa.PessoaFisica.CPF);
+                pessoa.PessoaJuridica.CNPJ = RemoverCaracteres.StringSemFormatacao(pessoa.PessoaJuridica.CNPJ);
+
                 _context.Add(pessoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -168,23 +164,23 @@ namespace SalesWebMvc.Controllers
                                                             .OrderBy(x => x.Descricao)
                                                             .Where(f => f.Deletado == false)
                                                             .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Receber)
-                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(f => f.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             PrazoPagamento prazoPagamento = new PrazoPagamento();
             ViewData["PrazoRecebimentoId"] = new SelectList(_context.PrazoPagamento
                                                             .OrderBy(p => p.Descricao)
                                                             .Where(p => p.Deletado == false)
                                                             .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Receber)
-                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(p => p.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             ViewData["FormaPagamentoId"] = new SelectList(_context.FormaPagamento
                                                             .OrderBy(x => x.Descricao)
                                                             .Where(f => f.Deletado == false)
                                                             .Where(f => f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Ambos || f.FormaPagamentoTipo == Models.Enums.FormaPagamentoTipo.Pagar)
-                                                            .Where(f => f.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(f => f.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             ViewData["PrazoPagamentoId"] = new SelectList(_context.PrazoPagamento
                                                             .OrderBy(p => p.Descricao)
                                                             .Where(p => p.Deletado == false)
                                                             .Where(p => p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Ambos || p.PrazoPagamentoTipo == Models.Enums.PrazoPagamentoTipo.Pagar)
-                                                            .Where(p => p.EmpresaId == Program.UserEmpresaId), "Id", "Descricao");
+                                                            .Where(p => p.EmpresaId == Program.EmpresaId), "Id", "Descricao");
             return View(pessoa);
         }
 
@@ -200,7 +196,7 @@ namespace SalesWebMvc.Controllers
                                                             "PessoaJuridica," +
                                                             "PessoaUsuario")] Pessoa pessoa)
         {
-             if (id != pessoa.Id)
+            if (id != pessoa.Id)
             {
                 return NotFound();
             }

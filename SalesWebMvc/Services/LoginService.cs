@@ -1,14 +1,9 @@
-﻿using SalesWebMvc.Models;
-using SalesWebMvc.Comuns;
+﻿using SalesWebMvc.Comuns;
 using SalesWebMvc.Context;
-using System;
-using System.Collections.Generic;
+using SalesWebMvc.Models;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-
-namespace SalesWebMvc.Services 
+namespace SalesWebMvc.Services
 {
     public class LoginService
     {
@@ -24,7 +19,7 @@ namespace SalesWebMvc.Services
         public bool ValidarAcesso(Login login)
         {
             //Remover caracteres do CPForCNPJ
-            var CNPJ = RemoverCaracteres.StringSemFormatacao(login.CNPJ);
+            string CNPJ = RemoverCaracteres.StringSemFormatacao(login.CNPJ);
 
             //testar se a empresa existe e qual o banco de dados
             IQueryable<Empresa> empresaComum = _context.Empresa
@@ -42,24 +37,39 @@ namespace SalesWebMvc.Services
                 Program.BancoDeDadosAplicacao = database;
                 if (Program.BancoDeDadosAplicacao != null)
                 {
-
+                    //como alterar o SalesWebMvcContext para a aplicação alterar o banco de dados
                 }
-                //verifica o acesso do usuario na base da aplicacao
+
+                //verifica se a empresa existe na base aplicação e resgata as informações
                 IQueryable<Empresa> empresaAplicacao = _contextAplicacao.Empresa
                     .Where(e => e.CNPJ == CNPJ)
                     .Where(e => e.Database == database)
                     .Where(x => x.Ativo == true);
+
                 foreach (Empresa item in empresaAplicacao)
                 {
-                    Program.UserEmpresaId = item.Id;
+                    Program.EmpresaId = item.Id;
                 }
 
-                return true;
+                //verifica o acesso do usuario
+                IQueryable<Pessoa> acesso = _contextAplicacao.Pessoa
+                    .Where(p => p.PessoaUsuario.Usuario == login.Usuario)
+                    .Where(p => p.PessoaUsuario.PessoaUsuarioSenha.Senha == login.Senha && p.PessoaUsuario.PessoaUsuarioSenha.Ativo == true)
+                    .Where(p => p.Deletado == false)
+                    .Where(p => p.EmpresaId == Program.EmpresaId);
+                if (acesso.GetEnumerator().MoveNext() == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
-            }          
+            }
         }
     }
 }
