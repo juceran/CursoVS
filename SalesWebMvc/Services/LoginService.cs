@@ -16,6 +16,8 @@ namespace SalesWebMvc.Services
             _contextAplicacao = contextAplicacao;
         }
 
+        public Pessoa PessoaLogada { get; set; }
+
         public bool ValidarAcesso(Login login)
         {
             //Remover caracteres do CPForCNPJ
@@ -56,6 +58,10 @@ namespace SalesWebMvc.Services
                     .Where(p => p.EmpresaId == Program.EmpresaId);
                 if (acesso.GetEnumerator().MoveNext() == true)
                 {
+                    foreach (var item in acesso)
+                    {
+                    }
+                    
                     return true;
                 }
                 else
