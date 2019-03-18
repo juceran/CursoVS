@@ -38,17 +38,7 @@ namespace SalesWebMvc
             //conexão com banco de dados " + Program.BancoDeDadosAplicacao + "
             services.AddDbContext<ComumContext>(options => options.UseNpgsql("Host=localhost;Database=Comum;Username=WODINPASS;Password=(*5523bASS%$12_."));
             services.AddDbContext<NovoContext>(options => options.UseNpgsql("Host=localhost;Database=Novo;Username=WODINPASS;Password=(*5523bASS%$12_."));
-
-            if (Program.BancoDeDadosAplicacao != null)
-            {
-                services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=" + Program.BancoDeDadosAplicacao + ";Username=WODINPASS;Password=(*5523bASS%$12_."));
-            }
-            else
-            {
-                //services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=;Username=;Password=;"));
-                services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=SalesWebMvc;Username=WODINPASS;Password=(*5523bASS%$12_."));
-            }
-
+            services.AddDbContext<SalesWebMvcContext>(options => options.UseNpgsql("Host=localhost;Database=" + Program.BancoDeDadosAplicacao + ";Username=WODINPASS;Password=(*5523bASS%$12_."));
 
             //injeçao de dependência para personalizar a criação do campos no banco de dados, FluentAPI - Contexts
             services.AddScoped<EmpresaConfiguration>();
@@ -78,6 +68,13 @@ namespace SalesWebMvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //var builder = new ConfigurationBuilder()
+            //                    .SetBasePath(env.ContentRootPath)
+            //                    .AddJsonFile("appsettings.json",
+            //                    optional: false,
+            //                    reloadOnChange: true)
+            //                    .AddEnvironmentVariables();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

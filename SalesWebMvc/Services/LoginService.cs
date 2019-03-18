@@ -34,11 +34,8 @@ namespace SalesWebMvc.Services
 
             if (!string.IsNullOrEmpty(database))
             {
+                //altera o direcionamento da base de dados do contexto
                 Program.BancoDeDadosAplicacao = database;
-                if (Program.BancoDeDadosAplicacao != null)
-                {
-                    //como alterar o SalesWebMvcContext para a aplicação alterar o banco de dados
-                }
 
                 //verifica se a empresa existe na base aplicação e resgata as informações
                 IQueryable<Empresa> empresaAplicacao = _contextAplicacao.Empresa

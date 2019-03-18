@@ -12,6 +12,12 @@ namespace SalesWebMvc.Context
 
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Database=" + Program.BancoDeDadosAplicacao + ";Username=WODINPASS;Password=(*5523bASS%$12_.");
+        }
+
+
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<Departamento> Departamento { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
