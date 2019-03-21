@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SalesWebMvc.Authorization;
 using SalesWebMvc.Context;
 using SalesWebMvc.ContextFluentAPI;
 using SalesWebMvc.Services;
 using System;
+using System.Globalization;
 
 namespace SalesWebMvc
 {
@@ -24,9 +28,29 @@ namespace SalesWebMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //globalizando o sistema
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+
             services.AddHttpContextAccessor();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.AddSession();
+
+            //importado do sistema de vendas
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("UsuarioLogado", policy =>
+                    policy.Requirements.Add(new UsuarioLogado(true)));
+            }).AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(o =>
+            {
+                o.LoginPath = "/";
+                o.LogoutPath = "/logout";
+                o.ExpireTimeSpan = TimeSpan.FromDays(7);
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -70,12 +94,15 @@ namespace SalesWebMvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //var builder = new ConfigurationBuilder()
-            //                    .SetBasePath(env.ContentRootPath)
-            //                    .AddJsonFile("appsettings.json",
-            //                    optional: false,
-            //                    reloadOnChange: true)
-            //                    .AddEnvironmentVariables();
+            // Definindo a cultura padrão: pt-BR
+            CultureInfo[] supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                //DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR"),
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             if (env.IsDevelopment())
             {

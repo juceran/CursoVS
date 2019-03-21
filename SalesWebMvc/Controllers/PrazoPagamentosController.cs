@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Context;
 using SalesWebMvc.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace SalesWebMvc.Controllers
 {
@@ -87,7 +87,7 @@ namespace SalesWebMvc.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Empresa", prazoPagamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", prazoPagamento.EmpresaId);
             return View(prazoPagamento);
         }
 
@@ -123,7 +123,7 @@ namespace SalesWebMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Uf", prazoPagamento.EmpresaId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "Id", "Fantasia", prazoPagamento.EmpresaId);
             return View(prazoPagamento);
         }
 

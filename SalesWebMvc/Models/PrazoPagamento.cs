@@ -1,4 +1,5 @@
-﻿using SalesWebMvc.Models.Base;
+﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebMvc.Models.Base;
 using SalesWebMvc.Models.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -35,12 +36,14 @@ namespace SalesWebMvc.Models
         [DataType(dataType: DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:C}")]
         [DefaultValue(0)]
+        //[ModelBinder(binderType: typeof(PtBr))
         public decimal Limite { get; set; }
 
         [Required]
-        [DefaultValue(1)]
-        [DisplayFormat(DataFormatString = "{0:N}")]
         [Display(Name = "Prazo Médio")]
+        [DataType(dataType: DataType.Currency)]       
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DefaultValue(1)]
         public decimal PrazoMedio { get; set; }
 
         [Required]

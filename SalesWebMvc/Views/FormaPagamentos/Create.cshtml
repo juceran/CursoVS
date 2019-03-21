@@ -78,7 +78,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
-        if (document.getElementById("CartaoCredito").value == false) {
+        if ($("#CartaoCredito").is(":checked") == false) {
             $('#CartaoCreditoVencimento').hide();
             $('#CartaoCreditoMelhorDia').hide();
             $('#CartaoCreditoBandeira').hide();

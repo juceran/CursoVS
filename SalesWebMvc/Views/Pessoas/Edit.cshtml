@@ -246,11 +246,11 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
-        if (document.getElementById("PessoaCliente_Cliente").value == true) { $('#tab_cliente').show(); } else { $('#tab_cliente').hide(); }
-        if (document.getElementById("PessoaFornecedor_Fornecedor").value == true) { $('#tab_fornecedor').show(); } else { $('#tab_fornecedor').hide(); }
-        if (document.getElementById("PessoaFisica_Fisica").value == true) { $('#tab_fisica').show(); } else { $('#tab_fisica').hide(); }
-        if (document.getElementById("PessoaJuridica_Juridica").value == true) { $('#tab_juridica').show(); } else { $('#tab_juridica').hide(); }
-        if (document.getElementById("PessoaUsuario_User").value == true) { $('#tab_usuario').show(); } else { $('#tab_usuario').hide(); }
+        if ($("#PessoaCliente_Cliente").is(":checked") == true) { $('#tab_cliente').show(); } else { $('#tab_cliente').hide(); }
+        if ($("#PessoaFornecedor_Fornecedor").is(":checked") == true) { $('#tab_fornecedor').show(); } else { $('#tab_fornecedor').hide(); }
+        if ($("#PessoaFisica_Fisica").is(":checked") == true) { $('#tab_fisica').show(); } else { $('#tab_fisica').hide(); }
+        if ($("#PessoaJuridica_Juridica").is(":checked") == true) { $('#tab_juridica').show(); } else { $('#tab_juridica').hide(); }
+        if ($("#PessoaUsuario_User").is(":checked") == true) { $('#tab_usuario').show(); } else { $('#tab_usuario').hide(); }
 
         $('#PessoaCliente_Cliente').change(
             function () {
