@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <PackageReference Include="BeginCollectionItemCore" Version="1.0.8" />
+    <PackageReference Include="jQuery.Validation.Globalize" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
